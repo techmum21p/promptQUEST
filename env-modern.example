@@ -1,0 +1,16 @@
+# Google AI Configuration
+# Option 1: Google AI Studio (Recommended/Easier)
+# Get your API key from: https://aistudio.google.com/app/apikey
+GOOGLE_API_KEY=your-google-ai-studio-api-key
+
+# Option 2: Vertex AI (Advanced)
+# Only set these if using Vertex AI instead of Google AI Studio
+GOOGLE_CLOUD_PROJECT=your-gcp-project-id
+GOOGLE_CLOUD_LOCATION=us-central1
+GOOGLE_GENAI_USE_VERTEXAI=FALSE
+
+# LLM Model (optional)
+LLM_MODEL=gemini-2.5-flash
+
+# Frontend API URL (for development)
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000

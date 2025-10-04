@@ -1,0 +1,218 @@
+{
+  "users": {
+    "testuser": {
+      "total_score": 0,
+      "attempts": 0,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": []
+    },
+    "test": {
+      "total_score": 0,
+      "attempts": 0,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": []
+    },
+    "testuser2": {
+      "total_score": 0,
+      "attempts": 0,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": []
+    },
+    "loui": {
+      "total_score": 646,
+      "attempts": 7,
+      "skill_level": "advanced",
+      "badges": [
+        "Consistent Performer"
+      ],
+      "history": [
+        {
+          "timestamp": "2025-10-05T02:14:18.061812",
+          "scenario_id": "b1",
+          "score": 98,
+          "evaluation": {
+            "clarity_score": 25,
+            "specificity_score": 23,
+            "structure_score": 25,
+            "task_alignment_score": 25,
+            "total_score": 98,
+            "feedback": "This is an exceptionally strong prompt for the given scenario. It clearly articulates the user's need to extract specific information (key decisions and action items) from a defined source (Q4 marketing campaign email thread) within a precise timeframe (the past week). This level of detail directly addresses the goal of catching up after being out of office, ensuring the AI focuses on the most relevant content. The prompt is concise, well-structured, and leaves very little room for misinterpretation of the core task. The only minor area for potential enhancement would be to specify the desired output format, although 'summarize' generally implies a readable, organized output.",
+            "strengths": [
+              "Clearly identifies the desired output: 'key decisions and action items'.",
+              "Precisely specifies the source: 'Q4 marketing campaign email thread'.",
+              "Provides a crucial time constraint: 'from the past week', which perfectly aligns with the 'out of office' context.",
+              "Directly addresses the user's goal of getting a concise summary to catch up.",
+              "The prompt is concise, direct, and well-structured."
+            ],
+            "improvements": [
+              "Could optionally specify the desired output format (e.g., 'as a bulleted list', 'include sender and date for each item') to further tailor the presentation of the summary."
+            ]
+          },
+          "user_prompt": ""
+        },
+        {
+          "timestamp": "2025-10-05T02:14:18.063312",
+          "scenario_id": "b1",
+          "score": 94,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 22,
+            "structure_score": 24,
+            "task_alignment_score": 25,
+            "total_score": 94,
+            "feedback": "This is a highly effective prompt that directly addresses the user's need. It clearly states the desired output (key decisions and action items), the source (Q4 marketing campaign email thread), and the relevant timeframe (from the past week). This level of detail ensures the AI understands the scope and focus of the summarization task, aligning perfectly with the scenario's goal of catching up quickly after being out of office.",
+            "strengths": [
+              "Clearly defines the specific types of information required (key decisions, action items).",
+              "Precisely identifies the subject matter/source (Q4 marketing campaign email thread).",
+              "Includes a critical time constraint (from the past week) which aligns with the 'out of office' context.",
+              "Directly aligns with the scenario's goal of getting a concise summary.",
+              "Concise and easy to understand."
+            ],
+            "improvements": [
+              "Could optionally reinforce the desired 'conciseness' (e.g., 'Provide a concise summary of...').",
+              "Could specify a preferred output format for the summary (e.g., 'Use bullet points for decisions and a separate list for action items').",
+              "While implied, mentioning the volume of emails (e.g., 'this 15-email thread') could provide additional context to the AI about the scale of the summarization."
+            ]
+          },
+          "user_prompt": ""
+        },
+        {
+          "timestamp": "2025-10-05T02:14:51.413524",
+          "scenario_id": "b1",
+          "score": 94,
+          "evaluation": {
+            "clarity_score": 24,
+            "specificity_score": 20,
+            "structure_score": 25,
+            "task_alignment_score": 25,
+            "total_score": 94,
+            "feedback": "This is an excellent prompt for email summarization. It clearly defines the desired output (key decisions and action items), specifies the source (Q4 marketing campaign email thread), and includes a crucial time constraint ('from the past week'). This directly addresses the user's need to catch up after being out of office. The prompt is concise, well-structured, and leaves little room for misinterpretation. To make it even more robust, one could add a preference for the summary's format (e.g., 'as bullet points', 'a short paragraph') or an explicit length constraint, though the current prompt is already highly effective.",
+            "strengths": [
+              "Clearly states the desired output (key decisions and action items).",
+              "Specifies the source (Q4 marketing campaign email thread).",
+              "Includes a crucial time constraint ('from the past week').",
+              "Directly aligns with the user's goal and context.",
+              "Concise and easy to understand."
+            ],
+            "improvements": [
+              "Could specify the desired output format (e.g., 'as bullet points', 'a short paragraph').",
+              "Could explicitly mention the desired conciseness (e.g., 'Provide a concise summary...').",
+              "Could ask for the summary to be presented in a specific way, like 'prioritize action items' or 'group decisions by topic'."
+            ]
+          },
+          "user_prompt": ""
+        },
+        {
+          "timestamp": "2025-10-05T02:22:10.703654",
+          "scenario_id": "b3",
+          "score": 92,
+          "evaluation": {
+            "clarity_score": 24,
+            "specificity_score": 20,
+            "structure_score": 23,
+            "task_alignment_score": 25,
+            "total_score": 92,
+            "feedback": "This is an excellent prompt for generating a draft slide based on provided bullet points. It's highly clear, specific about the content, and perfectly aligned with the task of structuring existing information into a slide. The AI would have no trouble understanding the core request and delivering a relevant output that directly addresses the user's needs for a 'Project Alpha Status Update' slide.",
+            "strengths": [
+              "Explicitly states the desired output type ('draft slide').",
+              "Provides a clear and concise slide title.",
+              "Lists all required content points directly and unambiguously.",
+              "Directly addresses the scenario's need to structure bullet points into a slide."
+            ],
+            "improvements": [
+              "Could optionally specify a desired slide layout or sectioning (e.g., 'use a two-column layout', 'separate challenges and next steps into distinct sections').",
+              "Could suggest a specific tone for the slide (e.g., 'professional and concise').",
+              "Could ask for a placeholder for a visual element (e.g., 'add a placeholder for a progress bar or chart')."
+            ]
+          },
+          "user_prompt": ""
+        },
+        {
+          "timestamp": "2025-10-05T02:22:10.705941",
+          "scenario_id": "b3",
+          "score": 99,
+          "evaluation": {
+            "clarity_score": 25,
+            "specificity_score": 24,
+            "structure_score": 25,
+            "task_alignment_score": 25,
+            "total_score": 99,
+            "feedback": "This is an exceptionally well-crafted prompt for the given scenario. It is crystal clear about the desired output (a draft slide), provides the exact title, and explicitly lists all the key points to be included. The structure is logical and easy for an AI to parse. It perfectly aligns with the goal of quickly generating a slide from existing bullet points, allowing Copilot to directly structure the information without needing further clarification or making assumptions about the content. The prompt is concise yet comprehensive for its intended purpose.",
+            "strengths": [
+              "Clear objective: 'Create a draft slide'.",
+              "Specific title provided: 'Project Alpha Status Update'.",
+              "Exact content points listed explicitly and clearly.",
+              "Excellent alignment with the scenario's goal of structuring bullet points into a slide.",
+              "Concise and direct, making it efficient for AI processing."
+            ],
+            "improvements": [
+              "While not strictly necessary for a 'draft outlining key points', for a more refined slide, one could optionally suggest a desired layout (e.g., 'use a standard bullet point layout') or specify a tone (e.g., 'professional and concise'). However, for the given task, the prompt is already highly effective."
+            ]
+          },
+          "user_prompt": ""
+        },
+        {
+          "timestamp": "2025-10-05T02:22:10.711086",
+          "scenario_id": "b3",
+          "score": 71,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 23,
+            "structure_score": 23,
+            "task_alignment_score": 2,
+            "total_score": 71,
+            "feedback": "The prompt is exceptionally clear, specific, and well-structured in its request for a 'draft slide' with defined content points for 'Project Alpha Status Update'. However, it critically misaligns with the overarching scenario's goal, which explicitly states the need to 'Generate a concise Teams message summarizing the meeting's main points and assigned actions.' The prompt requests a slide, not a Teams message, which is the primary deviation from the intended task. While the content about Project Alpha is relevant to the scenario's context, the requested output format is incorrect. To improve, the prompt should ask for a Teams message that incorporates the Project Alpha updates along with other meeting outcomes mentioned in the scenario (e.g., Sarah's task, Friday deadline) in the correct format.",
+            "strengths": [
+              "Clear request for specific content points.",
+              "Identifies the project name and topic.",
+              "Well-structured and easy to understand.",
+              "Specific about the desired output type (slide) within its own context."
+            ],
+            "improvements": [
+              "Align the requested output format (slide) with the scenario's primary goal (Teams message).",
+              "Integrate all relevant meeting outcomes from the scenario (Project Alpha updates, Sarah's task, Friday deadline) into a single request for a Teams message.",
+              "Specify desired tone or conciseness for the Teams message, if applicable."
+            ]
+          },
+          "user_prompt": ""
+        },
+        {
+          "timestamp": "2025-10-05T02:32:00.951186",
+          "scenario_id": "b3",
+          "score": 98,
+          "evaluation": {
+            "clarity_score": 25,
+            "specificity_score": 23,
+            "structure_score": 25,
+            "task_alignment_score": 25,
+            "total_score": 98,
+            "feedback": "This is an exceptionally well-crafted prompt. It is crystal clear, highly specific, and perfectly aligned with the stated scenario and goal. The user has explicitly defined the number of slides, the presentation duration, the topic, and the exact sections required for the outline. This level of detail makes it very easy for the model to generate a precise and relevant output. The mapping of 5 specific sections to a 5-slide outline is particularly effective for structuring the request.",
+            "strengths": [
+              "Explicitly states the desired number of slides (5).",
+              "Clearly defines the presentation duration (15 minutes).",
+              "Provides the specific topic ('Project Phoenix Launch').",
+              "Lists all required sections, which perfectly map to the 5-slide structure.",
+              "Directly addresses the scenario's need for organizing thoughts into a coherent flow."
+            ],
+            "improvements": [
+              "While already excellent, a minor enhancement could be to explicitly request a specific number of bullet points or a general level of detail for the 'talking points' within each slide (e.g., 'For each slide, provide 3-5 key bullet points'). However, 'outline' often implies this, so it's a very minor point."
+            ]
+          },
+          "user_prompt": " Create a 5-slide presentation outline for a 15-minute team meeting on the 'Project Phoenix Launch'. Include sections for Introduction, Key Features, Benefits, Timeline, and Q&A."
+        }
+      ]
+    }
+  },
+  "leaderboard": [
+    {
+      "username": "loui",
+      "avg_score": 92.29,
+      "total_attempts": 7,
+      "skill_level": "advanced",
+      "badges": 1
+    }
+  ]
+}

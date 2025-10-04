@@ -1,5 +1,28 @@
 # CSV files
 *.csv
+# Allow CSV exports but ignore auto-generated ones
+!user_progress_export_*.csv
+
+# Next.js
+frontend/.next/
+frontend/out/
+frontend/node_modules/
+frontend/.env*.local
+
+# Docker
+Dockerfile*
+docker-compose*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

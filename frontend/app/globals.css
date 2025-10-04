@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
+}
+
+@layer components {
+  /* Score Card Styles */
+  .score-card {
+    @apply bg-gradient-to-br from-primary-500 to-primary-700 p-6 rounded-xl text-white text-center shadow-lg;
+  }
+  
+  /* Scenario Card Styles */
+  .scenario-card {
+    @apply bg-white p-6 rounded-xl border-l-4 border-primary-500 shadow-md mb-4;
+  }
+  
+  /* Badge Styles */
+  .badge {
+    @apply inline-block px-4 py-2 bg-yellow-400 text-black rounded-full font-bold text-sm mr-2 mb-2;
+  }
+  
+  /* Feedback Styles */
+  .feedback-excellent {
+    @apply bg-green-50 border-l-4 border-green-500 p-4 rounded-md;
+  }
+  
+  .feedback-good {
+    @apply bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-md;
+  }
+  
+  .feedback-needs-work {
+    @apply bg-red-50 border-l-4 border-red-500 p-4 rounded-md;
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  /* Card Styles */
+  .card {
+    @apply bg-white rounded-xl shadow-md p-6;
+  }
+  
+  /* Animation Styles */
+  .animate-fade-in {
+    @apply animate-fade-in;
+  }
+  
+  .animate-slide-up {
+    @apply animate-slide-up;
+  }
+}
