@@ -78,19 +78,35 @@ class PromptEvaluatorAgent:
         Do not include any text before or after the JSON. Do not use markdown code blocks.
         """
         
-        # Use Google Gemini directly via the genai library for Vertex AI
+        # Use Google Gemini directly via the genai library
         try:
             import google.genai as genai
             from google.genai.types import GenerateContentConfig
             import os
             
-            # Get Vertex AI configuration from environment
-            project = os.getenv('GOOGLE_CLOUD_PROJECT')
-            location = os.getenv('GOOGLE_CLOUD_LOCATION')
-            llm_model = os.getenv('LLM_MODEL', 'gemini-2.5-flash')
+            # Check which authentication method to use
+            use_vertex_ai = os.getenv('GOOGLE_GENAI_USE_VERTEXAI', 'false').lower() == 'true'
+            llm_model = os.getenv('LLM_MODEL', 'gemini-2.0-flash-exp')
             
-            # Initialize the client for Vertex AI
-            client = genai.Client(vertexai=True, project=project, location=location)
+            if use_vertex_ai:
+                # Vertex AI configuration
+                project = os.getenv('GOOGLE_CLOUD_PROJECT')
+                location = os.getenv('GOOGLE_CLOUD_LOCATION', 'us-central1')
+                
+                if not project:
+                    raise ValueError("GOOGLE_CLOUD_PROJECT environment variable is required for Vertex AI")
+                
+                # Initialize the client for Vertex AI
+                client = genai.Client(vertexai=True, project=project, location=location)
+            else:
+                # Google AI Studio configuration
+                api_key = os.getenv('GOOGLE_API_KEY')
+                
+                if not api_key:
+                    raise ValueError("GOOGLE_API_KEY environment variable is required for Google AI Studio")
+                
+                # Initialize the client for Google AI Studio
+                client = genai.Client(api_key=api_key)
             
             # Generate content using the model
             response = client.models.generate_content(
@@ -228,14 +244,30 @@ class AIScenarioGenerator:
             from google.genai.types import GenerateContentConfig
             import os
             
-            # Get Vertex AI configuration from environment
-            project = os.getenv('GOOGLE_CLOUD_PROJECT')
-            location = os.getenv('GOOGLE_CLOUD_LOCATION')
-            llm_model = os.getenv('LLM_MODEL', 'gemini-2.5-flash')
+            # Check which authentication method to use
+            use_vertex_ai = os.getenv('GOOGLE_GENAI_USE_VERTEXAI', 'false').lower() == 'true'
+            llm_model = os.getenv('LLM_MODEL', 'gemini-2.0-flash-exp')
             
-            # Initialize the client for Vertex AI
-            client = genai.Client(vertexai=True, project=project, location=location)
-            
+            if use_vertex_ai:
+                # Vertex AI configuration
+                project = os.getenv('GOOGLE_CLOUD_PROJECT')
+                location = os.getenv('GOOGLE_CLOUD_LOCATION', 'us-central1')
+                
+                if not project:
+                    raise ValueError("GOOGLE_CLOUD_PROJECT environment variable is required for Vertex AI")
+                
+                # Initialize the client for Vertex AI
+                client = genai.Client(vertexai=True, project=project, location=location)
+            else:
+                # Google AI Studio configuration
+                api_key = os.getenv('GOOGLE_API_KEY')
+                
+                if not api_key:
+                    raise ValueError("GOOGLE_API_KEY environment variable is required for Google AI Studio")
+                
+                # Initialize the client for Google AI Studio
+                client = genai.Client(api_key=api_key)
+
             # Generate content using the model
             response = client.models.generate_content(
                 model=llm_model,

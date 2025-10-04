@@ -345,6 +345,101 @@
           }
         }
       ]
+    },
+    "loui": {
+      "total_score": 269,
+      "attempts": 4,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": [
+        {
+          "timestamp": "2025-10-04T17:49:49.820856",
+          "scenario_id": "b1",
+          "score": 60,
+          "evaluation": {
+            "clarity_score": 15,
+            "specificity_score": 15,
+            "structure_score": 15,
+            "task_alignment_score": 15,
+            "total_score": 60,
+            "feedback": "Evaluation service unavailable: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API keys are not supported by this API. Expected OAuth2 access token or other authentication credentials that assert a principal. See https://cloud.google.com/docs/authentication', 'status': 'UNAUTHENTICATED', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'CREDENTIALS_MISSING', 'domain': 'googleapis.com', 'metadata': {'method': 'google.cloud.aiplatform.v1beta1.PredictionService.GenerateContent', 'service': 'aiplatform.googleapis.com'}}]}}",
+            "strengths": [
+              "Prompt submitted"
+            ],
+            "improvements": [
+              "Try again later"
+            ]
+          },
+          "user_prompt": "From the email with subject \"Q4 marketing campaign\" from last week, go through each email in the thread and generate a concise summary  of the key decisions and action items in bullet format."
+        },
+        {
+          "timestamp": "2025-10-04T17:57:55.685714",
+          "scenario_id": "b1",
+          "score": 60,
+          "evaluation": {
+            "clarity_score": 15,
+            "specificity_score": 15,
+            "structure_score": 15,
+            "task_alignment_score": 15,
+            "total_score": 60,
+            "feedback": "Evaluation service unavailable: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API keys are not supported by this API. Expected OAuth2 access token or other authentication credentials that assert a principal. See https://cloud.google.com/docs/authentication', 'status': 'UNAUTHENTICATED', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'CREDENTIALS_MISSING', 'domain': 'googleapis.com', 'metadata': {'service': 'aiplatform.googleapis.com', 'method': 'google.cloud.aiplatform.v1beta1.PredictionService.GenerateContent'}}]}}",
+            "strengths": [
+              "Prompt submitted"
+            ],
+            "improvements": [
+              "Try again later"
+            ]
+          },
+          "user_prompt": "ummarize the key decisions and action items from the Q4 marketing campaign email thread from the past week. Present them in bullet format"
+        },
+        {
+          "timestamp": "2025-10-04T18:06:32.086599",
+          "scenario_id": "b1",
+          "score": 60,
+          "evaluation": {
+            "clarity_score": 15,
+            "specificity_score": 15,
+            "structure_score": 15,
+            "task_alignment_score": 15,
+            "total_score": 60,
+            "feedback": "Evaluation service unavailable: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API keys are not supported by this API. Expected OAuth2 access token or other authentication credentials that assert a principal. See https://cloud.google.com/docs/authentication', 'status': 'UNAUTHENTICATED', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'CREDENTIALS_MISSING', 'domain': 'googleapis.com', 'metadata': {'method': 'google.cloud.aiplatform.v1beta1.PredictionService.GenerateContent', 'service': 'aiplatform.googleapis.com'}}]}}",
+            "strengths": [
+              "Prompt submitted"
+            ],
+            "improvements": [
+              "Try again later"
+            ]
+          },
+          "user_prompt": "Summarize the key decisions and action items from the Q4 marketing campaign email thread from the past wee"
+        },
+        {
+          "timestamp": "2025-10-04T18:14:54.762677",
+          "scenario_id": "b3",
+          "score": 89,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 20,
+            "structure_score": 22,
+            "task_alignment_score": 24,
+            "total_score": 89,
+            "feedback": "This is a very strong prompt that clearly articulates the user's need for a 1-hour weekly project sync agenda. It successfully identifies the core components required: status updates, blockers, and next steps, and importantly, links these to previous action items for continuity. The specified duration is also very helpful. The prompt aligns exceptionally well with the scenario's goal of preparing a meeting agenda for project status. To make it even more robust, consider adding details about specific project areas or key team members who should provide updates, and perhaps a small slot for 'new business' or 'open discussion' if that's typical for these meetings. Explicitly mentioning the desired output format (e.g., 'with time allocations for each section') could also refine the result further.",
+            "strengths": [
+              "Clearly defines the output (1-hour meeting agenda).",
+              "Specifies the meeting type (weekly project sync).",
+              "Includes essential agenda items (status updates, blockers, next steps).",
+              "Emphasizes continuity by linking to 'last week's action items'.",
+              "Aligns exceptionally well with the scenario's core requirements."
+            ],
+            "improvements": [
+              "Could specify if time allocations are desired for each section of the agenda.",
+              "Could suggest including a brief 'new business' or 'open discussion' slot, if relevant.",
+              "Could explicitly mention any specific project areas or key individuals/teams expected to provide updates, if applicable.",
+              "Could link more directly to the scenario's 'recent discussions' beyond just action items, if there are specific topics that need follow-up."
+            ]
+          },
+          "user_prompt": "Create a 1-hour meeting agenda for our weekly project sync, including status updates, blockers, and next steps based on last week's action items"
+        }
+      ]
     }
   },
   "leaderboard": [
@@ -359,6 +454,13 @@
       "username": "vic",
       "avg_score": 87.5,
       "total_attempts": 2,
+      "skill_level": "beginner",
+      "badges": 0
+    },
+    {
+      "username": "loui",
+      "avg_score": 67.25,
+      "total_attempts": 4,
       "skill_level": "beginner",
       "badges": 0
     },
