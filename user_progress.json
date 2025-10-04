@@ -392,8 +392,8 @@
       ]
     },
     "loui": {
-      "total_score": 60,
-      "attempts": 1,
+      "total_score": 143,
+      "attempts": 2,
       "skill_level": "beginner",
       "badges": [],
       "history": [
@@ -416,11 +416,133 @@
             ]
           },
           "user_prompt": "Reformat the report so it has consistent font, spacing, and headline styles. Make the formatting professional in all pages. Do not modify the content"
+        },
+        {
+          "timestamp": "2025-10-05T02:58:41.574355",
+          "scenario_id": "b3",
+          "score": 83,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 18,
+            "structure_score": 17,
+            "task_alignment_score": 25,
+            "total_score": 83,
+            "feedback": "The prompt is exceptionally clear and directly aligns with the scenario's goal of creating a weekly project sync agenda. It effectively specifies the duration and the core content areas (status updates, blockers, next steps based on last week's action items), which are crucial for this type of meeting. This clarity ensures the AI understands the fundamental requirements. \n\nTo enhance the prompt's effectiveness, consider adding requests for more structural elements common in a well-organized agenda, such as a time breakdown for each section, a brief opening/welcome, and a dedicated slot for new discussion topics or decisions. While it mentions 'last week's action items,' providing a few example action items or asking the AI to generate placeholder examples would make the 'next steps' section even more concrete and tailored.",
+            "strengths": [
+              "Clearly defines the meeting type, duration, and purpose.",
+              "Explicitly lists the essential content sections (status, blockers, next steps).",
+              "Highlights the importance of following up on previous action items.",
+              "Perfectly aligns with the given scenario and goal."
+            ],
+            "improvements": [
+              "Request a time allocation for each agenda item to ensure the 1-hour limit is effectively utilized.",
+              "Suggest including standard meeting components like an opening (e.g., 'Welcome & Quick Review of Goals') and a closing (e.g., 'Action Item Review & Next Meeting Prep').",
+              "Ask for a dedicated section for new discussion topics, open questions, or decisions that might arise.",
+              "If possible, provide a few example 'last week's action items' to make the 'next steps' section more concrete, or ask the AI to generate placeholder examples."
+            ]
+          },
+          "user_prompt": "Create a 1-hour meeting agenda for our weekly project sync, including status updates, blockers, and next steps based on last week's action items"
+        }
+      ]
+    },
+    "andy": {
+      "total_score": 182,
+      "attempts": 2,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": [
+        {
+          "timestamp": "2025-10-05T03:01:53.523382",
+          "scenario_id": "b3",
+          "score": 92,
+          "evaluation": {
+            "clarity_score": 24,
+            "specificity_score": 20,
+            "structure_score": 23,
+            "task_alignment_score": 25,
+            "total_score": 92,
+            "feedback": "This is an excellent prompt for generating a quick draft slide. It is exceptionally clear, providing the exact title and bullet point content needed. The request directly aligns with the scenario's goal of creating an impromptu update slide with key progress points. The structure is straightforward and easy to parse, ensuring the AI understands precisely what to generate. For a 'draft' slide, the level of detail is highly effective.",
+            "strengths": [
+              "Clearly specifies the slide title.",
+              "Provides exact content for each bullet point.",
+              "Directly aligns with the scenario's goal and context.",
+              "Concise and easy to understand."
+            ],
+            "improvements": [
+              "Could optionally specify the desired slide layout (e.g., 'Use a 'Title and Content' layout').",
+              "Could optionally suggest minor formatting preferences (e.g., 'bold the percentage' or 'use a specific font size for the title')."
+            ]
+          },
+          "user_prompt": "Create a new slide for 'Project Andromeda Update' with bullet points: Feature X development is 70% complete, Testing phase to start next week, Anticipate launch by end of month."
+        },
+        {
+          "timestamp": "2025-10-05T03:04:07.052562",
+          "scenario_id": "b3",
+          "score": 90,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 20,
+            "structure_score": 22,
+            "task_alignment_score": 25,
+            "total_score": 90,
+            "feedback": "The prompt is highly effective for its stated goal. It clearly identifies the project name, its core purpose, and the desired tone (concise and professional), providing all essential information for generating a relevant and appropriate introductory slide. The request for conciseness is particularly valuable for this type of slide, ensuring the output is to the point. While it could include more granular details about slide elements (like presenter, date, or logo), it is excellent for outlining the project's purpose.",
+            "strengths": [
+              "Clearly identifies the project name ('Project Phoenix').",
+              "Explicitly states the project's main goal/purpose.",
+              "Specifies the desired output type ('introductory slide').",
+              "Includes crucial stylistic requirements ('concise and professional').",
+              "Directly aligns with the scenario's objective to outline the project's purpose."
+            ],
+            "improvements": [
+              "Could optionally specify if additional common introductory slide elements (e.g., presenter's name, date, or a placeholder for a company logo) should be included or excluded.",
+              "Could briefly mention the target audience (e.g., 'for a team presentation') if that context might influence the language or level of detail."
+            ]
+          },
+          "user_prompt": "Create an introductory slide for 'Project Phoenix'. The project's main goal is to streamline inter-departmental communication for Q3 initiatives. Make it concise and professional."
+        }
+      ]
+    },
+    "coy": {
+      "total_score": 86,
+      "attempts": 1,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": [
+        {
+          "timestamp": "2025-10-05T03:08:39.515661",
+          "scenario_id": "b2",
+          "score": 86,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 15,
+            "structure_score": 24,
+            "task_alignment_score": 24,
+            "total_score": 86,
+            "feedback": "The prompt is very clear and directly addresses the core problem of inconsistent formatting by providing specific instructions for body text font, size, and line spacing. This ensures high task alignment. However, its specificity could be significantly improved for a professional report. While 'uniform margins' is clear in intent, it lacks precise values (e.g., 1 inch, 1.25 inches). More importantly, for a 10-page report, specifying a single 'Arial 14pt bold for headings' is insufficient, as professional documents typically require distinct formatting for different heading levels (e.g., Heading 1, Heading 2, Heading 3) to establish a clear hierarchy. Adding these details would make the prompt much more robust and actionable for a professional formatting task.",
+            "strengths": [
+              "Clearly states desired font, size, and line spacing for body text.",
+              "Directly addresses the core problem of inconsistent formatting.",
+              "Easy to understand and follow for the specified elements.",
+              "High task alignment with the scenario's goal of consistent professional formatting."
+            ],
+            "improvements": [
+              "Specify exact margin values (e.g., '1 inch all around', 'Normal margins') instead of just 'uniform margins'.",
+              "Provide distinct formatting rules for multiple heading levels (e.g., Heading 1: Arial 16pt bold, Heading 2: Arial 14pt bold) to ensure a more hierarchical and professional document structure."
+            ]
+          },
+          "user_prompt": "Apply consistent professional formatting to this report: use Arial 11pt for body text, Arial 14pt bold for headings, 1.15 line spacing, and ensure uniform margins"
         }
       ]
     }
   },
   "leaderboard": [
+    {
+      "username": "andy",
+      "avg_score": 91.0,
+      "total_attempts": 2,
+      "skill_level": "beginner",
+      "badges": 0
+    },
     {
       "username": "vic",
       "avg_score": 87.5,
@@ -436,15 +558,22 @@
       "badges": 2
     },
     {
-      "username": "Vic",
-      "avg_score": 67.0,
+      "username": "coy",
+      "avg_score": 86.0,
       "total_attempts": 1,
       "skill_level": "beginner",
       "badges": 0
     },
     {
       "username": "loui",
-      "avg_score": 60.0,
+      "avg_score": 71.5,
+      "total_attempts": 2,
+      "skill_level": "beginner",
+      "badges": 0
+    },
+    {
+      "username": "Vic",
+      "avg_score": 67.0,
       "total_attempts": 1,
       "skill_level": "beginner",
       "badges": 0

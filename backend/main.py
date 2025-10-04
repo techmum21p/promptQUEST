@@ -53,7 +53,8 @@ app.add_middleware(
 )
 
 # Global tracker instance
-tracker = UserProgressTracker()
+# Use the main user_progress.json file from the project root
+tracker = UserProgressTracker(storage_file="../user_progress.json")
 
 # Pydantic models for request/response validation
 class UserRequest(BaseModel):
@@ -171,7 +172,7 @@ async def record_attempt(request: AttemptRecord):
 @app.get("/api/progress/leaderboard")
 async def get_leaderboard(top_n: int = 20):
     """Get the leaderboard"""
-    leaderboard = tracker.get_lessonboard(top_n=top_n)
+    leaderboard = tracker.get_leaderboard(top_n=top_n)
     return {"leaderboard": leaderboard}
 
 @app.get("/api/progress/export-summary")

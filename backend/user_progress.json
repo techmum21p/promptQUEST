@@ -1,112 +1,159 @@
 {
   "users": {
-    "testuser": {
-      "total_score": 0,
-      "attempts": 0,
-      "skill_level": "beginner",
-      "badges": [],
-      "history": []
-    },
-    "test": {
-      "total_score": 0,
-      "attempts": 0,
-      "skill_level": "beginner",
-      "badges": [],
-      "history": []
-    },
-    "testuser2": {
-      "total_score": 0,
-      "attempts": 0,
-      "skill_level": "beginner",
-      "badges": [],
-      "history": []
-    },
-    "loui": {
-      "total_score": 646,
-      "attempts": 7,
+    "airees": {
+      "total_score": 1037,
+      "attempts": 12,
       "skill_level": "advanced",
       "badges": [
-        "Consistent Performer"
+        "Consistent Performer",
+        "Dedicated Learner"
       ],
       "history": [
         {
-          "timestamp": "2025-10-05T02:14:18.061812",
+          "timestamp": "2025-09-30T10:41:27.536280",
           "scenario_id": "b1",
-          "score": 98,
+          "score": 89,
           "evaluation": {
-            "clarity_score": 25,
-            "specificity_score": 23,
-            "structure_score": 25,
-            "task_alignment_score": 25,
-            "total_score": 98,
-            "feedback": "This is an exceptionally strong prompt for the given scenario. It clearly articulates the user's need to extract specific information (key decisions and action items) from a defined source (Q4 marketing campaign email thread) within a precise timeframe (the past week). This level of detail directly addresses the goal of catching up after being out of office, ensuring the AI focuses on the most relevant content. The prompt is concise, well-structured, and leaves very little room for misinterpretation of the core task. The only minor area for potential enhancement would be to specify the desired output format, although 'summarize' generally implies a readable, organized output.",
+            "clarity_score": 22,
+            "specificity_score": 20,
+            "structure_score": 23,
+            "task_alignment_score": 24,
+            "total_score": 89,
+            "feedback": "The prompt is well-written and clearly states the user's need. It provides sufficient context (out of office, email thread length, topic) and explicitly asks for key insights, decisions, and action items, including due dates. The prompt directly aligns with the task of summarizing an email thread. Minor improvements could include specifying the desired length or format of the summary (e.g., bullet points, paragraph).",
             "strengths": [
-              "Clearly identifies the desired output: 'key decisions and action items'.",
-              "Precisely specifies the source: 'Q4 marketing campaign email thread'.",
-              "Provides a crucial time constraint: 'from the past week', which perfectly aligns with the 'out of office' context.",
-              "Directly addresses the user's goal of getting a concise summary to catch up.",
-              "The prompt is concise, direct, and well-structured."
+              "Clear statement of the problem and desired outcome.",
+              "Provides sufficient context for the task."
             ],
             "improvements": [
-              "Could optionally specify the desired output format (e.g., 'as a bulleted list', 'include sender and date for each item') to further tailor the presentation of the summary."
+              "Consider specifying the desired length or format of the summary.",
+              "Could add a constraint on the maximum number of action items to extract."
             ]
-          },
-          "user_prompt": ""
+          }
         },
         {
-          "timestamp": "2025-10-05T02:14:18.063312",
-          "scenario_id": "b1",
-          "score": 94,
+          "timestamp": "2025-09-30T11:42:39.939033",
+          "scenario_id": "b3",
+          "score": 70,
+          "evaluation": {
+            "clarity_score": 18,
+            "specificity_score": 15,
+            "structure_score": 17,
+            "task_alignment_score": 20,
+            "total_score": 70,
+            "feedback": "The prompt is generally clear about the desired outcome (a meeting agenda). However, it lacks specificity regarding the 'recent discussions'. To improve, the prompt should provide more context about what those discussions were about. The structure is decent, clearly stating the goal and context. The prompt aligns well with the scenario, aiming to prepare for a team meeting.",
+            "strengths": [
+              "Clear goal",
+              "Good task alignment"
+            ],
+            "improvements": [
+              "Add context about recent discussions",
+              "Specify desired agenda format"
+            ]
+          }
+        },
+        {
+          "timestamp": "2025-09-30T13:21:34.075987",
+          "scenario_id": "b3",
+          "score": 83,
           "evaluation": {
             "clarity_score": 23,
-            "specificity_score": 22,
-            "structure_score": 24,
+            "specificity_score": 15,
+            "structure_score": 20,
             "task_alignment_score": 25,
-            "total_score": 94,
-            "feedback": "This is a highly effective prompt that directly addresses the user's need. It clearly states the desired output (key decisions and action items), the source (Q4 marketing campaign email thread), and the relevant timeframe (from the past week). This level of detail ensures the AI understands the scope and focus of the summarization task, aligning perfectly with the scenario's goal of catching up quickly after being out of office.",
+            "total_score": 83,
+            "feedback": "The prompt clearly articulates the desired output (PowerPoint presentation) and several key formatting constraints (one major section per slide, bullet points, conditional graphics). It aligns very well with the stated scenario of quickly drafting a presentation from an outline for a team sync. However, the most critical piece of information \u2013 the actual 'notes and outline' from OneNote \u2013 is referenced but not provided within the prompt itself. This makes the prompt incomplete for execution. While the prompt *describes* what to do with the outline, it doesn't *give* the outline. Additionally, instructions regarding 'necessary text formatting' could be more specific to guide the AI better, as could the criteria for 'emphasis' for graphics.",
             "strengths": [
-              "Clearly defines the specific types of information required (key decisions, action items).",
-              "Precisely identifies the subject matter/source (Q4 marketing campaign email thread).",
-              "Includes a critical time constraint (from the past week) which aligns with the 'out of office' context.",
-              "Directly aligns with the scenario's goal of getting a concise summary.",
+              "Clear Objective: The prompt clearly states the main goal: to generate a PowerPoint presentation.",
+              "Good Structural Constraints: Specifies 'each slide must contain only one major section' and 'key points in bullet format,' which are excellent guidelines for presentation structure.",
+              "Contextual Alignment: Directly addresses the scenario's need for a quick draft for a team sync, implying efficiency and direct conversion from an outline.",
+              "Conditional Graphics: Provides a sensible rule for when to include graphics, preventing unnecessary visual clutter."
+            ],
+            "improvements": [
+              "Provide the Outline: The most crucial improvement is to include the actual 'notes and and outline' that the presentation should be based on. Without this, the AI cannot complete the core task. This could be done by appending the outline directly to the prompt or clearly stating where it will be provided (e.g., 'The outline will follow this prompt in a separate message').",
+              "Specify Text Formatting: 'Necessary text formatting' is vague. Provide examples or specific requirements (e.g., 'Use clear headings for sections, bold key terms, ensure font size is readable for a presentation').",
+              "Clarify 'Major Section': While generally understood, for complex outlines, it might be helpful to define what constitutes a 'major section' from the user's perspective (e.g., 'Each top-level heading in my outline should be a major section').",
+              "Guidance on Graphics: While the condition is good, 'emphasis on the subject matter' is subjective. Consider adding guidance on the *type* of graphics (e.g., 'simple icons, relevant charts, or stock photos related to the topic') or suggesting the AI ask for clarification if unsure."
+            ]
+          }
+        },
+        {
+          "timestamp": "2025-09-30T13:55:19.421665",
+          "scenario_id": "b3",
+          "score": 80,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 12,
+            "structure_score": 20,
+            "task_alignment_score": 25,
+            "total_score": 80,
+            "feedback": "The prompt is very clear about its objective: creating a meeting agenda for a 1-hour weekly project status sync, including key points and expected outcomes. It aligns perfectly with the given scenario and goal. However, its main limitation lies in specificity. While it requests an agenda 'based on the recent discussions we had in our group chat,' it does not provide any of those discussions. This forces the AI to generate a generic agenda rather than one tailored to actual recent conversations, significantly reducing the quality and relevance of the output. Providing even a summary or bullet points of the key topics from the chat would drastically improve the specificity and the utility of the generated agenda.",
+            "strengths": [
+              "Clear and concise objective (create a meeting agenda).",
+              "Specifies meeting duration (1 hour) and frequency (weekly sync).",
+              "Clearly defines required elements: Key Points and Expected Outcomes.",
+              "Perfectly aligns with the provided scenario and goal."
+            ],
+            "improvements": [
+              "Provide the actual 'recent discussions' or a summary of key topics from the group chat to enable the AI to create a truly relevant and specific agenda.",
+              "Optionally, include the project name or type (e.g., 'Alpha Project,' 'Marketing Campaign Launch') for better context.",
+              "Optionally, mention specific challenges, blockers, or successes discussed in the chat that should be addressed."
+            ]
+          },
+          "user_prompt": "I have a 1-hour weekly sync meeting about the status of our project. Create a meeting agenda based on the recent discussions we had in our group chat. Include Key Points that will be highlighted in the meeting and what expected outcome/s after the meeting."
+        },
+        {
+          "timestamp": "2025-09-30T14:09:11.049579",
+          "scenario_id": "b2",
+          "score": 82,
+          "evaluation": {
+            "clarity_score": 20,
+            "specificity_score": 15,
+            "structure_score": 22,
+            "task_alignment_score": 25,
+            "total_score": 82,
+            "feedback": "The prompt is very clear in its instructions for body text font, size, heading style, and line spacing, directly addressing the core inconsistencies outlined in the scenario. It is concise and easy to understand. However, its specificity could be significantly enhanced. While it requests 'uniform margins,' it doesn't provide a concrete value (e.g., '1-inch margins'), which is crucial for professional consistency. Furthermore, for a '10-page report,' professional formatting typically involves more than just body text, headings, spacing, and margins. It lacks instructions for different heading levels (H1, H2, H3), bullet points, numbered lists, tables, figures, page numbering, headers/footers, or a table of contents, which are common elements in a comprehensive report. Adding these details would make the prompt much more robust and ensure a truly professional and complete formatting outcome.",
+            "strengths": [
+              "Clearly specifies font, size, and style for body text and main headings.",
+              "Clearly specifies line spacing.",
+              "Directly addresses the core inconsistencies mentioned in the context (fonts, spacing, heading styles).",
               "Concise and easy to understand."
             ],
             "improvements": [
-              "Could optionally reinforce the desired 'conciseness' (e.g., 'Provide a concise summary of...').",
-              "Could specify a preferred output format for the summary (e.g., 'Use bullet points for decisions and a separate list for action items').",
-              "While implied, mentioning the volume of emails (e.g., 'this 15-email thread') could provide additional context to the AI about the scale of the summarization."
+              "Specify a concrete value for 'uniform margins' (e.g., '1-inch margins all around').",
+              "Provide formatting guidelines for different heading levels (e.g., H1, H2, H3, etc.).",
+              "Include instructions for other common report elements such as bullet points, numbered lists, tables, figures, page numbering, and headers/footers.",
+              "Consider adding guidance for a table of contents or cover page if relevant to the 'professional report' context."
             ]
           },
-          "user_prompt": ""
+          "user_prompt": "Apply consistent professional formatting to this report: use Arial 11pt for body text, Arial 14pt bold for headings, 1.15 line spacing, and ensure uniform margins"
         },
         {
-          "timestamp": "2025-10-05T02:14:51.413524",
-          "scenario_id": "b1",
-          "score": 94,
+          "timestamp": "2025-09-30T14:18:39.586134",
+          "scenario_id": "b3",
+          "score": 95,
           "evaluation": {
-            "clarity_score": 24,
+            "clarity_score": 25,
             "specificity_score": 20,
             "structure_score": 25,
             "task_alignment_score": 25,
-            "total_score": 94,
-            "feedback": "This is an excellent prompt for email summarization. It clearly defines the desired output (key decisions and action items), specifies the source (Q4 marketing campaign email thread), and includes a crucial time constraint ('from the past week'). This directly addresses the user's need to catch up after being out of office. The prompt is concise, well-structured, and leaves little room for misinterpretation. To make it even more robust, one could add a preference for the summary's format (e.g., 'as bullet points', 'a short paragraph') or an explicit length constraint, though the current prompt is already highly effective.",
+            "total_score": 95,
+            "feedback": "This is an excellent prompt that is very clear, well-structured, and perfectly aligned with the scenario and goal. It explicitly states the desired output (presentation outline), the topic ('Q3 Sales Performance'), the duration (10 minutes), and the mandatory sections (introduction, key achievements, challenges, next steps). This provides all the necessary core information for generating a highly relevant and useful outline. The prompt's directness and inclusion of key constraints make it very effective.",
             "strengths": [
-              "Clearly states the desired output (key decisions and action items).",
-              "Specifies the source (Q4 marketing campaign email thread).",
-              "Includes a crucial time constraint ('from the past week').",
-              "Directly aligns with the user's goal and context.",
-              "Concise and easy to understand."
+              "Clearly defines the output type (presentation outline).",
+              "Specifies the exact project topic ('Q3 Sales Performance').",
+              "Sets a precise time constraint (10-minute update).",
+              "Explicitly lists all required sections for the outline.",
+              "Perfectly aligns with the scenario's goal of generating a basic outline and the context of a project update."
             ],
             "improvements": [
-              "Could specify the desired output format (e.g., 'as bullet points', 'a short paragraph').",
-              "Could explicitly mention the desired conciseness (e.g., 'Provide a concise summary...').",
-              "Could ask for the summary to be presented in a specific way, like 'prioritize action items' or 'group decisions by topic'."
+              "Could optionally specify the target audience (e.g., 'for executive leadership' or 'for the project team') to help tailor the tone and level of detail.",
+              "Could optionally suggest the desired level of detail for each section (e.g., 'aim for 3-5 bullet points per main section') to further guide the output's depth."
             ]
           },
-          "user_prompt": ""
+          "user_prompt": "Generate a presentation outline for a 10-minute update on the 'Q3 Sales Performance' project, including sections for introduction, key achievements, challenges, and next steps."
         },
         {
-          "timestamp": "2025-10-05T02:22:10.703654",
+          "timestamp": "2025-09-30T14:50:16.716654",
           "scenario_id": "b3",
           "score": 92,
           "evaluation": {
@@ -115,73 +162,25 @@
             "structure_score": 23,
             "task_alignment_score": 25,
             "total_score": 92,
-            "feedback": "This is an excellent prompt for generating a draft slide based on provided bullet points. It's highly clear, specific about the content, and perfectly aligned with the task of structuring existing information into a slide. The AI would have no trouble understanding the core request and delivering a relevant output that directly addresses the user's needs for a 'Project Alpha Status Update' slide.",
+            "feedback": "The prompt is exceptionally clear and directly addresses the scenario's requirements. It specifies the duration, project name, and essential sections, providing excellent guidance for generating a relevant presentation outline. The inclusion of the 10-minute constraint is particularly valuable for pacing the content. To make it even more robust, adding details about the target audience or the desired level of detail within each section (e.g., asking for 2-3 bullet points per section, or specific metrics to highlight) could further refine the output.",
             "strengths": [
-              "Explicitly states the desired output type ('draft slide').",
-              "Provides a clear and concise slide title.",
-              "Lists all required content points directly and unambiguously.",
-              "Directly addresses the scenario's need to structure bullet points into a slide."
+              "Clearly defines the core task: 'Generate a presentation outline'.",
+              "Specifies the exact duration: '10-minute update'.",
+              "Identifies the project name: 'Q3 Sales Performance'.",
+              "Explicitly lists required sections: 'introduction, key achievements, challenges, and next steps'.",
+              "Perfectly aligns with the scenario's goal and context."
             ],
             "improvements": [
-              "Could optionally specify a desired slide layout or sectioning (e.g., 'use a two-column layout', 'separate challenges and next steps into distinct sections').",
-              "Could suggest a specific tone for the slide (e.g., 'professional and concise').",
-              "Could ask for a placeholder for a visual element (e.g., 'add a placeholder for a progress bar or chart')."
+              "Could include the target audience (e.g., 'for senior management', 'for the sales team') to tailor the tone and content.",
+              "Could specify the desired level of detail for the outline (e.g., 'include 2-3 bullet points for each section', 'suggest potential slide titles').",
+              "Could ask for specific types of data or metrics to be highlighted within sections (e.g., 'for achievements, mention top-performing products or regions')."
             ]
           },
-          "user_prompt": ""
+          "user_prompt": "Generate a presentation outline for a 10-minute update on the 'Q3 Sales Performance' project, including sections for introduction, key achievements, challenges, and next steps."
         },
         {
-          "timestamp": "2025-10-05T02:22:10.705941",
-          "scenario_id": "b3",
-          "score": 99,
-          "evaluation": {
-            "clarity_score": 25,
-            "specificity_score": 24,
-            "structure_score": 25,
-            "task_alignment_score": 25,
-            "total_score": 99,
-            "feedback": "This is an exceptionally well-crafted prompt for the given scenario. It is crystal clear about the desired output (a draft slide), provides the exact title, and explicitly lists all the key points to be included. The structure is logical and easy for an AI to parse. It perfectly aligns with the goal of quickly generating a slide from existing bullet points, allowing Copilot to directly structure the information without needing further clarification or making assumptions about the content. The prompt is concise yet comprehensive for its intended purpose.",
-            "strengths": [
-              "Clear objective: 'Create a draft slide'.",
-              "Specific title provided: 'Project Alpha Status Update'.",
-              "Exact content points listed explicitly and clearly.",
-              "Excellent alignment with the scenario's goal of structuring bullet points into a slide.",
-              "Concise and direct, making it efficient for AI processing."
-            ],
-            "improvements": [
-              "While not strictly necessary for a 'draft outlining key points', for a more refined slide, one could optionally suggest a desired layout (e.g., 'use a standard bullet point layout') or specify a tone (e.g., 'professional and concise'). However, for the given task, the prompt is already highly effective."
-            ]
-          },
-          "user_prompt": ""
-        },
-        {
-          "timestamp": "2025-10-05T02:22:10.711086",
-          "scenario_id": "b3",
-          "score": 71,
-          "evaluation": {
-            "clarity_score": 23,
-            "specificity_score": 23,
-            "structure_score": 23,
-            "task_alignment_score": 2,
-            "total_score": 71,
-            "feedback": "The prompt is exceptionally clear, specific, and well-structured in its request for a 'draft slide' with defined content points for 'Project Alpha Status Update'. However, it critically misaligns with the overarching scenario's goal, which explicitly states the need to 'Generate a concise Teams message summarizing the meeting's main points and assigned actions.' The prompt requests a slide, not a Teams message, which is the primary deviation from the intended task. While the content about Project Alpha is relevant to the scenario's context, the requested output format is incorrect. To improve, the prompt should ask for a Teams message that incorporates the Project Alpha updates along with other meeting outcomes mentioned in the scenario (e.g., Sarah's task, Friday deadline) in the correct format.",
-            "strengths": [
-              "Clear request for specific content points.",
-              "Identifies the project name and topic.",
-              "Well-structured and easy to understand.",
-              "Specific about the desired output type (slide) within its own context."
-            ],
-            "improvements": [
-              "Align the requested output format (slide) with the scenario's primary goal (Teams message).",
-              "Integrate all relevant meeting outcomes from the scenario (Project Alpha updates, Sarah's task, Friday deadline) into a single request for a Teams message.",
-              "Specify desired tone or conciseness for the Teams message, if applicable."
-            ]
-          },
-          "user_prompt": ""
-        },
-        {
-          "timestamp": "2025-10-05T02:32:00.951186",
-          "scenario_id": "b3",
+          "timestamp": "2025-09-30T16:21:38.242155",
+          "scenario_id": "b1",
           "score": 98,
           "evaluation": {
             "clarity_score": 25,
@@ -189,30 +188,266 @@
             "structure_score": 25,
             "task_alignment_score": 25,
             "total_score": 98,
-            "feedback": "This is an exceptionally well-crafted prompt. It is crystal clear, highly specific, and perfectly aligned with the stated scenario and goal. The user has explicitly defined the number of slides, the presentation duration, the topic, and the exact sections required for the outline. This level of detail makes it very easy for the model to generate a precise and relevant output. The mapping of 5 specific sections to a 5-slide outline is particularly effective for structuring the request.",
+            "feedback": "This is an exceptionally well-crafted prompt that perfectly aligns with the user's goal and context. It is clear, concise, and provides all necessary information for an AI to perform the task effectively. The prompt specifies the desired output (key decisions and action items), the source (Q4 marketing campaign email thread), and the relevant timeframe (past week), directly addressing the user's need to catch up after being out of office.",
             "strengths": [
-              "Explicitly states the desired number of slides (5).",
-              "Clearly defines the presentation duration (15 minutes).",
-              "Provides the specific topic ('Project Phoenix Launch').",
-              "Lists all required sections, which perfectly map to the 5-slide structure.",
-              "Directly addresses the scenario's need for organizing thoughts into a coherent flow."
+              "Clearly states the objective: 'Summarize the key decisions and action items'.",
+              "Precisely identifies the source material: 'Q4 marketing campaign email thread'.",
+              "Specifies the relevant timeframe: 'from the past week'.",
+              "Directly addresses the user's scenario and pain point (catching up after OOO).",
+              "Concise and easy to understand."
             ],
             "improvements": [
-              "While already excellent, a minor enhancement could be to explicitly request a specific number of bullet points or a general level of detail for the 'talking points' within each slide (e.g., 'For each slide, provide 3-5 key bullet points'). However, 'outline' often implies this, so it's a very minor point."
+              "While strong, for an AI that might not implicitly know which 'thread' to access, adding a specific identifier like 'the thread with the subject line 'Q4 Marketing Campaign Update'' could make it even more robust, though the current prompt is sufficient given the Outlook context.",
+              "Optionally, the user could specify a desired output format (e.g., 'as bullet points', 'in a short paragraph') or a length constraint (e.g., 'under 100 words') for more control over the summary's presentation."
             ]
           },
-          "user_prompt": " Create a 5-slide presentation outline for a 15-minute team meeting on the 'Project Phoenix Launch'. Include sections for Introduction, Key Features, Benefits, Timeline, and Q&A."
+          "user_prompt": "Summarize the key decisions and action items from the Q4 marketing campaign email thread from the past week"
+        },
+        {
+          "timestamp": "2025-10-01T10:01:18.200331",
+          "scenario_id": "b1",
+          "score": 97,
+          "evaluation": {
+            "clarity_score": 24,
+            "specificity_score": 23,
+            "structure_score": 25,
+            "task_alignment_score": 25,
+            "total_score": 97,
+            "feedback": "This is an exceptionally well-crafted prompt for the given scenario. It clearly defines the source material (email thread), the desired output format (bulleted summary), and the specific types of information to extract (key decisions, insights, action items). The crucial instruction to organize the summary 'for each person involved in the campaign' is highly practical and directly addresses the user's need to quickly understand individual responsibilities after being out of office. The 'Make it concise' instruction further refines the expected output quality, ensuring efficiency. The inclusion of 'insights' is also valuable for providing context beyond just tasks and decisions. This prompt leaves very little room for ambiguity regarding the core task.",
+            "strengths": [
+              "Clearly defines the source and scope of information ('email thread about the Q4 marketing campaign last week').",
+              "Explicitly specifies the exact content to extract ('key decisions, insights and action items').",
+              "Mandates a structured and easily digestible output format ('bulleted summary').",
+              "Requires organization by individual ('for each person involved'), which is highly practical for quick comprehension and action.",
+              "Explicitly asks for conciseness, aligning perfectly with the user's goal of quickly catching up.",
+              "Includes 'insights' which adds valuable contextual understanding beyond just actions and decisions."
+            ],
+            "improvements": [
+              "Could optionally specify how to handle individuals with no identified decisions, insights, or action items (e.g., 'only include individuals with relevant items' or 'list all involved individuals even if they have no items').",
+              "Could specify the desired order of information within each person's section (e.g., 'decisions first, then insights, then action items')."
+            ]
+          },
+          "user_prompt": "Based on the email thread about the Q4 marketing campaign last week, create a bulleted summary highlighting the key decisions, insights and action items for each person involved in the campaign.  Make it concise. "
+        },
+        {
+          "timestamp": "2025-10-02T12:46:51.552757",
+          "scenario_id": "b1",
+          "score": 94,
+          "evaluation": {
+            "clarity_score": 24,
+            "specificity_score": 20,
+            "structure_score": 25,
+            "task_alignment_score": 25,
+            "total_score": 94,
+            "feedback": "This is an excellent prompt that is highly effective for the given scenario. It clearly defines the desired output (key decisions and action items), the specific source material (Q4 marketing campaign email thread), and a crucial timeframe (from the past week). This directness ensures the AI understands precisely what information is needed to help the user catch up quickly after being out of office. The prompt is concise, well-structured, and perfectly aligned with the user's goal. While already very good, minor enhancements could include specifying the desired output format or requesting additional details for action items.",
+            "strengths": [
+              "Clearly defines the desired output (key decisions and action items).",
+              "Specifies the exact scope of the content to be summarized (Q4 marketing campaign email thread).",
+              "Includes a crucial timeframe ('from the past week') which is vital for the scenario.",
+              "Directly addresses the user's goal of catching up quickly.",
+              "Concise and easy to understand, minimizing ambiguity."
+            ],
+            "improvements": [
+              "Could specify the desired output format (e.g., 'Summarize in bullet points,' 'Provide action items in a table with owners and deadlines').",
+              "Could ask for a brief overview of the overall sentiment or major challenges discussed if that level of context is desired."
+            ]
+          },
+          "user_prompt": "Summarize the key decisions and action items from the Q4 marketing campaign email thread from the past week"
+        },
+        {
+          "timestamp": "2025-10-05T00:20:43.691873",
+          "scenario_id": "a99",
+          "score": 60,
+          "evaluation": {
+            "clarity_score": 15,
+            "specificity_score": 15,
+            "structure_score": 15,
+            "task_alignment_score": 15,
+            "total_score": 60,
+            "feedback": "Evaluation service unavailable: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}",
+            "strengths": [
+              "Prompt submitted"
+            ],
+            "improvements": [
+              "Try again later"
+            ]
+          },
+          "user_prompt": "Create a advanced level prompt for Microsoft 365 Copilot that includes specific context and clear objectives"
+        },
+        {
+          "timestamp": "2025-10-05T00:25:33.837477",
+          "scenario_id": "a1",
+          "score": 97,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 24,
+            "structure_score": 25,
+            "task_alignment_score": 25,
+            "total_score": 97,
+            "feedback": "This is an exceptionally well-crafted prompt. It provides a clear, specific, and structured request for a comprehensive competitive analysis, perfectly aligning with the stated scenario, goal, and context. The inclusion of specific data sources and deliverable components significantly enhances its actionable nature and reduces ambiguity, making it highly effective for generating the desired output.",
+            "strengths": [
+              "High Specificity: Clearly defines the product type, number of competitors, analysis aspects (features, pricing, positioning), data sources (SharePoint, Outlook, Teams, analyst reports), timeframe for feedback (6 months), and roadmap implications (3 years).",
+              "Actionable Data Sources: Explicitly points to internal resources like SharePoint, Outlook, and Teams, making the task immediately actionable and grounded in internal data.",
+              "Structured Deliverable: Specifies the exact format (5-page Word report) and required sections (executive summary, SWOT, competitive matrix, prioritized recommendations), ensuring the output meets expectations.",
+              "Clear Scope: The numbered list for analysis points makes the scope of work unambiguous and easy to follow.",
+              "Strong Task Alignment: Directly addresses the need for strategic analysis, competitive intelligence, and recommendations for senior leadership, perfectly matching the scenario and goal."
+            ],
+            "improvements": [
+              "Clarify 'Our SaaS Product': While 'in the CRM space' is good, specifying the exact name of the SaaS product would remove any potential ambiguity, especially if the company has multiple CRM-related offerings.",
+              "Guidance on 'Analyst Reports': For market trends, providing examples of preferred analyst firms (e.g., Gartner, Forrester) or a general location for these reports (e.g., 'SharePoint 'Industry Reports' folder' or 'subscription services') could further streamline the data gathering process."
+            ]
+          },
+          "user_prompt": "Conduct a competitive analysis for our SaaS product in the CRM space. Analyze: 1) Top 5 competitors' feature sets, pricing, and market positioning (search recent industry reports in SharePoint 'Market Research' folder). 2) Our differentiation opportunities based on customer feedback from past 6 months (Outlook and Teams). 3) Market trends from analyst reports. 4) Strategic recommendations with 3-year roadmap implications. Deliverable: 5-page Word report with executive summary, SWOT analysis, competitive matrix, and prioritized recommendations."
+        }
+      ]
+    },
+    "vic": {
+      "total_score": 175,
+      "attempts": 2,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": [
+        {
+          "timestamp": "2025-09-30T10:55:31.478369",
+          "scenario_id": "i1",
+          "score": 83,
+          "evaluation": {
+            "clarity_score": 22,
+            "specificity_score": 18,
+            "structure_score": 20,
+            "task_alignment_score": 23,
+            "total_score": 83,
+            "feedback": "The prompt is generally clear and well-aligned with the scenario. It clearly states the goal, context, and desired output format. However, it could benefit from more specific instructions regarding the types of trends to look for (e.g., growth rates, seasonality, correlations) and the types of visualizations desired (e.g., bar charts, line graphs, heatmaps). Specifying the desired level of detail in the analysis would also be helpful. The request for 'unnoticeable patterns' is vague and could be refined.",
+            "strengths": [
+              "Clear goal and context",
+              "Well-defined output format (markdown)",
+              "Good task alignment with the scenario"
+            ],
+            "improvements": [
+              "Specify types of trends to analyze",
+              "Suggest specific visualization types"
+            ]
+          }
+        },
+        {
+          "timestamp": "2025-09-30T15:09:04.795505",
+          "scenario_id": "b1",
+          "score": 92,
+          "evaluation": {
+            "clarity_score": 24,
+            "specificity_score": 20,
+            "structure_score": 23,
+            "task_alignment_score": 25,
+            "total_score": 92,
+            "feedback": "This is a very strong prompt that effectively addresses the user's need to quickly catch up on a long email thread. It clearly defines the desired output (key decisions and action items), the source (Q4 marketing campaign email thread), and the crucial time frame (past week). The alignment with the scenario's goal and context is excellent, making it highly actionable for an AI. The prompt could be made even more robust by specifying the desired output format or additional details for action items.",
+            "strengths": [
+              "Clearly states the desired output: 'key decisions and action items'.",
+              "Identifies the specific source: 'Q4 marketing campaign email thread'.",
+              "Includes a crucial time constraint: 'from the past week', directly addressing the 'out of office' context.",
+              "Directly aligns with the user's goal of getting a concise summary to catch up quickly.",
+              "Simple, direct, and easy to understand."
+            ],
+            "improvements": [
+              "Could specify the desired output format (e.g., 'as bullet points', 'grouped by decision/action item', 'with responsible parties for action items').",
+              "Could ask for a brief context for each decision or action item if more detail is needed.",
+              "Could request a list of key participants or contributors to the decisions."
+            ]
+          },
+          "user_prompt": "Summarize the key decisions and action items from the Q4 marketing campaign email thread from the past week"
+        }
+      ]
+    },
+    "Vic": {
+      "total_score": 67,
+      "attempts": 1,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": [
+        {
+          "timestamp": "2025-09-30T13:26:40.081775",
+          "scenario_id": "b3",
+          "score": 67,
+          "evaluation": {
+            "clarity_score": 22,
+            "specificity_score": 10,
+            "structure_score": 23,
+            "task_alignment_score": 12,
+            "total_score": 67,
+            "feedback": "The prompt is clear in its basic request for a single PowerPoint slide template with three main bullet points for a team meeting. However, it significantly lacks specificity regarding the actual content of the bullet points, which the scenario implies should be provided ('based on provided bullet points'). It also doesn't specify any design or style preferences for the 'template,' making it difficult to generate a truly useful or customized output. The slight ambiguity between asking for a 'template' and stating it 'should contain' specific bullet points (without providing them) also reduces its effectiveness.",
+            "strengths": [
+              "Clearly states the desired output format (single PPT slide template).",
+              "Specifies the exact number of main bullet points (3).",
+              "Identifies the target audience and purpose (team meeting).",
+              "Concise and easy to understand at a high level."
+            ],
+            "improvements": [
+              "Provide the actual 'three key updates about the new project's progress' as bullet points, as implied by the scenario's goal.",
+              "Specify a desired title for the slide.",
+              "Include details about the desired template style or design (e.g., modern, minimalist, professional, specific color scheme, company branding guidelines).",
+              "Clarify if the output should be a truly empty template with placeholders, or a slide filled with the provided content (which would then require the content).",
+              "Suggest any preferred layout elements (e.g., image placeholder, logo, specific font styles)."
+            ]
+          }
+        }
+      ]
+    },
+    "loui": {
+      "total_score": 60,
+      "attempts": 1,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": [
+        {
+          "timestamp": "2025-10-04T14:24:51.179715",
+          "scenario_id": "b2",
+          "score": 60,
+          "evaluation": {
+            "clarity_score": 15,
+            "specificity_score": 15,
+            "structure_score": 15,
+            "task_alignment_score": 15,
+            "total_score": 60,
+            "feedback": "Evaluation service unavailable: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}",
+            "strengths": [
+              "Prompt submitted"
+            ],
+            "improvements": [
+              "Try again later"
+            ]
+          },
+          "user_prompt": "Reformat the report so it has consistent font, spacing, and headline styles. Make the formatting professional in all pages. Do not modify the content"
         }
       ]
     }
   },
   "leaderboard": [
     {
-      "username": "loui",
-      "avg_score": 92.29,
-      "total_attempts": 7,
+      "username": "vic",
+      "avg_score": 87.5,
+      "total_attempts": 2,
+      "skill_level": "beginner",
+      "badges": 0
+    },
+    {
+      "username": "airees",
+      "avg_score": 86.42,
+      "total_attempts": 12,
       "skill_level": "advanced",
-      "badges": 1
+      "badges": 2
+    },
+    {
+      "username": "Vic",
+      "avg_score": 67.0,
+      "total_attempts": 1,
+      "skill_level": "beginner",
+      "badges": 0
+    },
+    {
+      "username": "loui",
+      "avg_score": 60.0,
+      "total_attempts": 1,
+      "skill_level": "beginner",
+      "badges": 0
     }
   ]
 }
