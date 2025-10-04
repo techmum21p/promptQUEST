@@ -1,8 +1,8 @@
 {
   "users": {
     "airees": {
-      "total_score": 880,
-      "attempts": 10,
+      "total_score": 1037,
+      "attempts": 12,
       "skill_level": "advanced",
       "badges": [
         "Consistent Performer",
@@ -253,6 +253,51 @@
             ]
           },
           "user_prompt": "Summarize the key decisions and action items from the Q4 marketing campaign email thread from the past week"
+        },
+        {
+          "timestamp": "2025-10-05T00:20:43.691873",
+          "scenario_id": "a99",
+          "score": 60,
+          "evaluation": {
+            "clarity_score": 15,
+            "specificity_score": 15,
+            "structure_score": 15,
+            "task_alignment_score": 15,
+            "total_score": 60,
+            "feedback": "Evaluation service unavailable: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}",
+            "strengths": [
+              "Prompt submitted"
+            ],
+            "improvements": [
+              "Try again later"
+            ]
+          },
+          "user_prompt": "Create a advanced level prompt for Microsoft 365 Copilot that includes specific context and clear objectives"
+        },
+        {
+          "timestamp": "2025-10-05T00:25:33.837477",
+          "scenario_id": "a1",
+          "score": 97,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 24,
+            "structure_score": 25,
+            "task_alignment_score": 25,
+            "total_score": 97,
+            "feedback": "This is an exceptionally well-crafted prompt. It provides a clear, specific, and structured request for a comprehensive competitive analysis, perfectly aligning with the stated scenario, goal, and context. The inclusion of specific data sources and deliverable components significantly enhances its actionable nature and reduces ambiguity, making it highly effective for generating the desired output.",
+            "strengths": [
+              "High Specificity: Clearly defines the product type, number of competitors, analysis aspects (features, pricing, positioning), data sources (SharePoint, Outlook, Teams, analyst reports), timeframe for feedback (6 months), and roadmap implications (3 years).",
+              "Actionable Data Sources: Explicitly points to internal resources like SharePoint, Outlook, and Teams, making the task immediately actionable and grounded in internal data.",
+              "Structured Deliverable: Specifies the exact format (5-page Word report) and required sections (executive summary, SWOT, competitive matrix, prioritized recommendations), ensuring the output meets expectations.",
+              "Clear Scope: The numbered list for analysis points makes the scope of work unambiguous and easy to follow.",
+              "Strong Task Alignment: Directly addresses the need for strategic analysis, competitive intelligence, and recommendations for senior leadership, perfectly matching the scenario and goal."
+            ],
+            "improvements": [
+              "Clarify 'Our SaaS Product': While 'in the CRM space' is good, specifying the exact name of the SaaS product would remove any potential ambiguity, especially if the company has multiple CRM-related offerings.",
+              "Guidance on 'Analyst Reports': For market trends, providing examples of preferred analyst firms (e.g., Gartner, Forrester) or a general location for these reports (e.g., 'SharePoint 'Industry Reports' folder' or 'subscription services') could further streamline the data gathering process."
+            ]
+          },
+          "user_prompt": "Conduct a competitive analysis for our SaaS product in the CRM space. Analyze: 1) Top 5 competitors' feature sets, pricing, and market positioning (search recent industry reports in SharePoint 'Market Research' folder). 2) Our differentiation opportunities based on customer feedback from past 6 months (Outlook and Teams). 3) Market trends from analyst reports. 4) Strategic recommendations with 3-year roadmap implications. Deliverable: 5-page Word report with executive summary, SWOT analysis, competitive matrix, and prioritized recommendations."
         }
       ]
     },
@@ -345,16 +390,37 @@
           }
         }
       ]
+    },
+    "loui": {
+      "total_score": 60,
+      "attempts": 1,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": [
+        {
+          "timestamp": "2025-10-04T14:24:51.179715",
+          "scenario_id": "b2",
+          "score": 60,
+          "evaluation": {
+            "clarity_score": 15,
+            "specificity_score": 15,
+            "structure_score": 15,
+            "task_alignment_score": 15,
+            "total_score": 60,
+            "feedback": "Evaluation service unavailable: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}",
+            "strengths": [
+              "Prompt submitted"
+            ],
+            "improvements": [
+              "Try again later"
+            ]
+          },
+          "user_prompt": "Reformat the report so it has consistent font, spacing, and headline styles. Make the formatting professional in all pages. Do not modify the content"
+        }
+      ]
     }
   },
   "leaderboard": [
-    {
-      "username": "airees",
-      "avg_score": 88.0,
-      "total_attempts": 10,
-      "skill_level": "advanced",
-      "badges": 2
-    },
     {
       "username": "vic",
       "avg_score": 87.5,
@@ -363,8 +429,22 @@
       "badges": 0
     },
     {
+      "username": "airees",
+      "avg_score": 86.42,
+      "total_attempts": 12,
+      "skill_level": "advanced",
+      "badges": 2
+    },
+    {
       "username": "Vic",
       "avg_score": 67.0,
+      "total_attempts": 1,
+      "skill_level": "beginner",
+      "badges": 0
+    },
+    {
+      "username": "loui",
+      "avg_score": 60.0,
       "total_attempts": 1,
       "skill_level": "beginner",
       "badges": 0

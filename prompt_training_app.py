@@ -78,19 +78,39 @@ class PromptEvaluatorAgent:
         Do not include any text before or after the JSON. Do not use markdown code blocks.
         """
         
-        # Use Google Gemini directly via the genai library for Vertex AI
+        # Use Google Gemini via the genai library (supports both Vertex AI and Google AI Studio)
         try:
             import google.genai as genai
             from google.genai.types import GenerateContentConfig
             import os
             
-            # Get Vertex AI configuration from environment
-            project = os.getenv('GOOGLE_CLOUD_PROJECT')
-            location = os.getenv('GOOGLE_CLOUD_LOCATION')
-            llm_model = os.getenv('LLM_MODEL', 'gemini-2.5-flash')
+            # Get model configuration
+            llm_model = os.getenv('LLM_MODEL', 'gemini-1.5-flash')
+            use_vertexai = os.getenv('GOOGLE_GENAI_USE_VERTEXAI', 'FALSE').upper() == 'TRUE'
             
-            # Initialize the client for Vertex AI
-            client = genai.Client(vertexai=True, project=project, location=location)
+            # Initialize the client based on configuration
+            # Default to Google AI Studio API key authentication
+            api_key = os.getenv('GOOGLE_API_KEY')
+            
+            if use_vertexai:
+                # Vertex AI configuration (only if explicitly enabled)
+                project = os.getenv('GOOGLE_CLOUD_PROJECT')
+                location = os.getenv('GOOGLE_CLOUD_LOCATION', 'us-central1')
+                if not project:
+                    raise ValueError("GOOGLE_CLOUD_PROJECT is required when using Vertex AI. Set GOOGLE_GENAI_USE_VERTEXAI=FALSE to use Google AI Studio instead.")
+                client = genai.Client(vertexai=True, project=project, location=location)
+            elif api_key and api_key != 'your-api-key-here':
+                # Google AI Studio configuration (default)
+                client = genai.Client(api_key=api_key)
+            else:
+                # Fallback: try to use gcloud credentials if no API key
+                try:
+                    client = genai.Client(vertexai=True)
+                except Exception as gcloud_error:
+                    raise ValueError(
+                        "No valid authentication method found. Please set GOOGLE_API_KEY with your Google AI Studio API key, "
+                        "or enable Vertex AI authentication with gcloud. Get your API key from: https://aistudio.google.com/app/apikey"
+                    )
             
             # Generate content using the model
             response = client.models.generate_content(
@@ -228,13 +248,33 @@ class AIScenarioGenerator:
             from google.genai.types import GenerateContentConfig
             import os
             
-            # Get Vertex AI configuration from environment
-            project = os.getenv('GOOGLE_CLOUD_PROJECT')
-            location = os.getenv('GOOGLE_CLOUD_LOCATION')
-            llm_model = os.getenv('LLM_MODEL', 'gemini-2.5-flash')
+            # Get model configuration
+            llm_model = os.getenv('LLM_MODEL', 'gemini-1.5-flash')
+            use_vertexai = os.getenv('GOOGLE_GENAI_USE_VERTEXAI', 'FALSE').upper() == 'TRUE'
             
-            # Initialize the client for Vertex AI
-            client = genai.Client(vertexai=True, project=project, location=location)
+            # Initialize the client based on configuration
+            # Default to Google AI Studio API key authentication
+            api_key = os.getenv('GOOGLE_API_KEY')
+            
+            if use_vertexai:
+                # Vertex AI configuration (only if explicitly enabled)
+                project = os.getenv('GOOGLE_CLOUD_PROJECT')
+                location = os.getenv('GOOGLE_CLOUD_LOCATION', 'us-central1')
+                if not project:
+                    raise ValueError("GOOGLE_CLOUD_PROJECT is required when using Vertex AI. Set GOOGLE_GENAI_USE_VERTEXAI=FALSE to use Google AI Studio instead.")
+                client = genai.Client(vertexai=True, project=project, location=location)
+            elif api_key and api_key != 'your-api-key-here':
+                # Google AI Studio configuration (default)
+                client = genai.Client(api_key=api_key)
+            else:
+                # Fallback: try to use gcloud credentials if no API key
+                try:
+                    client = genai.Client(vertexai=True)
+                except Exception as gcloud_error:
+                    raise ValueError(
+                        "No valid authentication method found. Please set GOOGLE_API_KEY with your Google AI Studio API key, "
+                        "or enable Vertex AI authentication with gcloud. Get your API key from: https://aistudio.google.com/app/apikey"
+                    )
             
             # Generate content using the model
             response = client.models.generate_content(
