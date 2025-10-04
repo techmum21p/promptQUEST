@@ -1,0 +1,70 @@
+# Requirements for Prompt Training App with PostgreSQL Database
+# Original requirements plus database dependencies
+
+# AI and LLM Dependencies
+google-adk>=0.1.0
+google-genai>=0.1.0
+google-cloud-aiplatform>=1.35.0
+
+# Web Framework
+streamlit>=1.28.0
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Database Dependencies
+asyncpg>=0.29.0
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.23
+alembic>=1.12.1
+
+# Data Processing
+pandas>=2.1.4
+numpy>=1.24.3
+
+# Development and Testing
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
+pytest-mock>=3.12.0
+
+# Utilities
+python-dotenv>=1.0.0
+logging>=0.4.9.6
+hashlib
+bcrypt>=4.1.2
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+nest-asyncio>=1.5.8
+
+# Connection Pool Management
+aioredis>=2.0.1
+redis>=5.0.1
+
+# Monitoring and Metrics (Optional)
+prometheus-client>=0.19.0
+structlog>=23.2.0
+
+# Environment Management
+typing-extensions>=4.8.0
+
+# Migration Support
+psycopg2>=2.9.9
+pgcli>=4.0.1
+
+# Backup and Database Management
+pgbackrest>=15.0.0  # For advanced backup strategies (optional)
+
+# Production Considerations
+gunicorn>=21.2.0
+supervisor>=4.2.5
+
+# Security Enhancements
+cryptography>=41.0.7
+ssl>=23.0.0
+
+# Performance
+orjson>=3.9.10  # Faster JSON processing
+uvloop>=0.19.0  # Faster event loop
+
+# Configuration Management
+pydantic>=2.5.0
+pydantic-settings>=2.1.0

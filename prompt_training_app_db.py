@@ -1,20 +1,30 @@
 """
-Gamified Prompt Engineering Training App using Google ADK and Vertex AI
+Gamified Prompt Engineering Training App using Google ADK, Vertex AI, and PostgreSQL
+This version includes PostgreSQL integration for user management and progress tracking.
 """
 
 import os
 import json
 import asyncio
-from datetime import datetime
-from typing import Dict, List, Any
+import hashlib
+from datetime import datetime, timezone
+from typing import Dict, List, Any, Optional
 from google.adk.agents import Agent
 from dotenv import load_dotenv
+
+# Import our database services
+from database.service import (
+    UserService, ProgressService, BadgeService, LeaderboardService,
+    UserData, ProgressData, BadgeData, LeaderboardEntry
+)
+from database.config import init_database, close_database
 
 # Load environment variables
 load_dotenv()
 
 # Get configuration from environment variables
 llm_model = os.getenv('LLM_MODEL', 'gemini-2.5-flash')
+
 
 class PromptEvaluatorAgent:
     """Agent that evaluates prompt quality using Gemini"""
@@ -86,7 +96,7 @@ class PromptEvaluatorAgent:
             
             # Check which authentication method to use
             use_vertex_ai = os.getenv('GOOGLE_GENAI_USE_VERTEXAI', 'false').lower() == 'true'
-            llm_model = os.getenv('LLM_MODEL', 'gemini-2.0-flash-exp')
+            llm_model = os.getenv('LLM_MODEL', 'gemini-2.5-flash')
             
             if use_vertex_ai:
                 # Vertex AI configuration
@@ -261,7 +271,7 @@ class AIScenarioGenerator:
             
             # Check which authentication method to use
             use_vertex_ai = os.getenv('GOOGLE_GENAI_USE_VERTEXAI', 'false').lower() == 'true'
-            llm_model = os.getenv('LLM_MODEL', 'gemini-2.0-flash-exp')
+            llm_model = os.getenv('LLM_MODEL', 'gemini-2.5-flash')
             
             if use_vertex_ai:
                 # Vertex AI configuration
@@ -498,261 +508,154 @@ class CopilotScenarioGenerator:
         }
 
 
-class UserProgressTracker:
-    """Tracks user progress and scores"""
+class UserProgressTrackerDB:
+    """Tracks user progress and scores using PostgreSQL database"""
     
-    def __init__(self, storage_file: str = "user_progress.json"):
-        self.storage_file = storage_file
-        self.data = self._load_data()
+    def __init__(self):
+        self.user_service = UserService()
+        self.progress_service = ProgressService()
+        self.badge_service = BadgeService()
+        self.leaderboard_service = LeaderboardService()
+        self.current_session = {}  # Track current session users
     
-    def _load_data(self) -> Dict:
-        """Load user progress from file"""
-        if os.path.exists(self.storage_file):
-            try:
-                with open(self.storage_file, 'r') as f:
-                    data = json.load(f)
-                    # Validate the structure
-                    if not isinstance(data, dict) or 'users' not in data or 'leaderboard' not in data:
-                        print(f"Warning: Invalid JSON structure in {self.storage_file}, creating new file")
-                        return {"users": {}, "leaderboard": []}
-                    return data
-            except json.JSONDecodeError as e:
-                print(f"Error: Corrupted JSON file {self.storage_file}: {e}")
-                print("Creating backup and initializing new data...")
-                # Create backup of corrupted file
-                backup_name = f"{self.storage_file}.backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-                try:
-                    import shutil
-                    shutil.copy2(self.storage_file, backup_name)
-                    print(f"Backup created: {backup_name}")
-                except Exception as backup_error:
-                    print(f"Could not create backup: {backup_error}")
-                # Return fresh data structure
-                return {"users": {}, "leaderboard": []}
-            except Exception as e:
-                print(f"Unexpected error loading {self.storage_file}: {e}")
-                return {"users": {}, "leaderboard": []}
-        return {"users": {}, "leaderboard": []}
+    def _hash_password(self, password: str) -> str:
+        """Hash password using SHA-256 (in production, use more secure hashing)"""
+        return hashlib.sha256(password.encode()).hexdigest()
     
-    def _save_data(self):
-        """Save user progress to file"""
+    async def authenticate_user(self, ldap_id: str, password: str) -> Optional[UserData]:
+        """Authenticate user with LDAP ID and password"""
         try:
-            # Create a temporary file first to avoid corruption
-            temp_file = f"{self.storage_file}.tmp"
-            with open(temp_file, 'w') as f:
-                json.dump(self.data, f, indent=2)
-            
-            # If write was successful, replace the original file
-            import shutil
-            shutil.move(temp_file, self.storage_file)
+            user = await self.user_service.get_user_by_ldap_id(ldap_id)
+            if user and user.password_hash == self._hash_password(password):
+                # Update last login
+                await self.user_service.update_user_last_login(user.id)
+                self.current_session[user.ldap_id] = user
+                return user
         except Exception as e:
-            print(f"Error saving data to {self.storage_file}: {e}")
-            # Clean up temp file if it exists
-            temp_file = f"{self.storage_file}.tmp"
-            if os.path.exists(temp_file):
-                try:
-                    os.remove(temp_file)
-                except:
-                    pass
+            print(f"Authentication error: {e}")
+        return None
     
-    def add_user(self, username: str):
-        """Add a new user"""
-        if username not in self.data["users"]:
-            self.data["users"][username] = {
-                "total_score": 0,
-                "attempts": 0,
-                "skill_level": "beginner",
-                "badges": [],
-                "history": []
-            }
-            self._save_data()
+    async def register_user(self, ldap_id: str, username: str, password: str, email: str, group: str) -> Optional[UserData]:
+        """Register a new user"""
+        try:
+            # Check if user already exists
+            existing_user = await self.user_service.get_user_by_ldap_id(ldap_id)
+            if existing_user:
+                print(f"User with LDAP ID {ldap_id} already exists")
+                return None
+            
+            user_data = UserData(
+                ldap_id=ldap_id,
+                username=username,
+                password_hash=self._hash_password(password),
+                email_address=email,
+                user_group=group
+            )
+            
+            user = await self.user_service.create_user(user_data)
+            print(f"User {username} registered successfully")
+            return user
+            
+        except Exception as e:
+            print(f"Registration error: {e}")
+            return None
     
-    def record_attempt(self, username: str, scenario_id: str, score: int, evaluation: Dict, user_prompt: str = ""):
-        """Record a user's attempt"""
-        if username not in self.data["users"]:
-            self.add_user(username)
-        
-        user = self.data["users"][username]
-        user["attempts"] += 1
-        user["total_score"] += score
-        user["history"].append({
-            "timestamp": datetime.now().isoformat(),
-            "scenario_id": scenario_id,
-            "score": score,
-            "evaluation": evaluation,
-            "user_prompt": user_prompt
-        })
-        
-        # Update skill level based on performance
-        avg_score = user["total_score"] / user["attempts"]
-        if avg_score >= 85 and user["attempts"] >= 5:
-            user["skill_level"] = "advanced"
-        elif avg_score >= 70 and user["attempts"] >= 3:
-            user["skill_level"] = "intermediate"
-        
-        # Award badges
-        self._check_and_award_badges(username)
-        
-        # Update leaderboard
-        self._update_leaderboard(username)
-        
-        # Auto-backup every few users
-        self.auto_backup_to_csv()
-        
-        self._save_data()
+    async def record_attempt(self, ldap_id: str, scenario_id: str, score: int, evaluation: Dict, user_prompt: str = ""):
+        """Record a user's attempt with automatic batch processing"""
+        try:
+            # Get user
+            user = await self.user_service.get_user_by_ldap_id(ldap_id)
+            if not user:
+                print(f"User {ldap_id} not found")
+                return
+            
+            # Get current attempt number
+            progress_summary = await self.progress_service.get_user_progress_summary(ldap_id)
+            attempt_number = 1 if not progress_summary else progress_summary['total_attempts'] + 1
+            
+            # Create progress entry
+            progress_data = ProgressData(
+                ldap_id=ldap_id,
+                attempt_number=attempt_number,
+                scenario_id=scenario_id,
+                user_prompt=user_prompt,
+                total_score=evaluation['total_score'],
+                clarity_score=evaluation.get('clarity_score', 0),
+                specificity_score=evaluation.get('specificity_score', 0),
+                structure_score=evaluation.get('structure_score', 0),
+                task_alignment_score=evaluation.get('task_alignment_score', 0),
+                skill_level="beginner",  # Will be updated by database trigger
+                feedback=evaluation.get('feedback', ''),
+                strengths=evaluation.get('strengths', []),
+                improvements=evaluation.get('improvements', [])
+            )
+            
+            # For immediate recording (as requested), create the entry directly
+            await self.progress_service.create_progress_entry(progress_data)
+            
+            # Check and award badges
+            await self.badge_service.check_and_award_badges(ldap_id, progress_data)
+            
+            print(f"Recorded attempt #{attempt_number} for {ldap_id}: Score {score}")
+            
+        except Exception as e:
+            print(f"Error recording attempt: {e}")
     
-    def _check_and_award_badges(self, username: str):
-        """Check and award badges based on performance"""
-        user = self.data["users"][username]
-        badges = user["badges"]
-        
-        # Perfect Score badge
-        if any(h["score"] == 100 for h in user["history"]) and "Perfect Score" not in badges:
-            badges.append("Perfect Score")
-        
-        # Consistent Performer badge (3 attempts with score > 80)
-        high_scores = [h for h in user["history"] if h["score"] > 80]
-        if len(high_scores) >= 3 and "Consistent Performer" not in badges:
-            badges.append("Consistent Performer")
-        
-        # Dedicated Learner badge (10 attempts)
-        if user["attempts"] >= 10 and "Dedicated Learner" not in badges:
-            badges.append("Dedicated Learner")
-        
-        # Advanced Master badge (5 advanced scenarios with avg > 85)
-        advanced_attempts = [h for h in user["history"] if h["scenario_id"].startswith("a")]
-        if len(advanced_attempts) >= 5:
-            avg_advanced = sum(h["score"] for h in advanced_attempts) / len(advanced_attempts)
-            if avg_advanced > 85 and "Advanced Master" not in badges:
-                badges.append("Advanced Master")
-    
-    def _update_leaderboard(self, username: str):
-        """Update the leaderboard"""
-        user = self.data["users"][username]
-        avg_score = user["total_score"] / user["attempts"] if user["attempts"] > 0 else 0
-        
-        # Remove existing entry
-        self.data["leaderboard"] = [
-            entry for entry in self.data["leaderboard"] 
-            if entry["username"] != username
-        ]
-        
-        # Add new entry
-        self.data["leaderboard"].append({
-            "username": username,
-            "avg_score": round(avg_score, 2),
-            "total_attempts": user["attempts"],
-            "skill_level": user["skill_level"],
-            "badges": len(user["badges"])
-        })
-        
-        # Sort by average score
-        self.data["leaderboard"].sort(key=lambda x: x["avg_score"], reverse=True)
-    
-    def get_user_stats(self, username: str) -> Dict:
+    async def get_user_stats(self, ldap_id: str) -> Optional[Dict]:
         """Get user statistics"""
-        if username not in self.data["users"]:
-            return None
-        return self.data["users"][username]
-    
-    def get_leaderboard(self, top_n: int = 10) -> List[Dict]:
-        """Get top N users from leaderboard"""
-        return self.data["leaderboard"][:top_n]
-    
-    def export_to_csv(self, filename: str = None) -> str:
-        """Export user data to CSV for analysis"""
-        import pandas as pd
-        
-        if not filename:
-            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            filename = f"user_progress_export_{timestamp}.csv"
-        
-        # Flatten data for CSV
-        rows = []
-        for username, data in self.data["users"].items():
-            if data["history"]:  # Only include users with attempts
-                for attempt in data["history"]:
-                    eval_data = attempt.get('evaluation', {})
-                    user_prompt = attempt.get('user_prompt', '')
-                    strengths = eval_data.get('strengths', [])
-                    improvements = eval_data.get('improvements', [])
-                    rows.append({
-                        'username': username,
-                        'timestamp': attempt['timestamp'],
-                        'scenario_id': attempt['scenario_id'],
-                        'total_score': attempt['score'],
-                        'clarity_score': eval_data.get('clarity_score', 0),
-                        'specificity_score': eval_data.get('specificity_score', 0),
-                        'structure_score': eval_data.get('structure_score', 0),
-                        'task_alignment_score': eval_data.get('task_alignment_score', 0),
-                        'skill_level': data['skill_level'],
-                        'total_attempts': data['attempts'],
-                        'cumulative_score': data['total_score'],
-                        'avg_score': round(data['total_score'] / data['attempts'], 2) if data['attempts'] > 0 else 0,
-                        'badges_count': len(data['badges']),
-                        'badges': ', '.join(data['badges']) if data['badges'] else '',
-                        'user_prompt': user_prompt,
-                        'strengths': '; '.join(strengths) if strengths else '',
-                        'improvements': '; '.join(improvements) if improvements else '',
-                        'feedback_summary': eval_data.get('feedback', '')[:100] + '...' if len(eval_data.get('feedback', '')) > 100 else eval_data.get('feedback', '')
-                    })
-            else:  # Include users without attempts for completeness
-                rows.append({
-                    'username': username,
-                    'timestamp': '',
-                    'scenario_id': '',
-                    'total_score': 0,
-                    'clarity_score': 0,
-                    'specificity_score': 0,
-                    'structure_score': 0,
-                    'task_alignment_score': 0,
-                    'skill_level': data['skill_level'],
-                    'total_attempts': data['attempts'],
-                    'cumulative_score': data['total_score'],
-                    'avg_score': 0,
-                    'badges_count': len(data['badges']),
-                    'badges': ', '.join(data['badges']) if data['badges'] else '',
-                    'user_prompt': '',
-                    'strengths': '',
-                    'improvements': '',
-                    'feedback_summary': 'No attempts yet'
-                })
-        
-        if rows:
-            df = pd.DataFrame(rows)
-            # Sort by username and timestamp for better organization
-            df = df.sort_values(['username', 'timestamp'], na_position='last')
-            df.to_csv(filename, index=False)
-            return filename
-        else:
+        try:
+            return await self.progress_service.get_user_progress_summary(ldap_id)
+        except Exception as e:
+            print(f"Error getting user stats: {e}")
             return None
     
-    def auto_backup_to_csv(self):
-        """Automatically backup data to CSV periodically"""
-        total_users = len(self.data["users"])
-        if total_users > 0 and total_users % 5 == 0:  # Every 5 users
-            filename = self.export_to_csv()
-            if filename:
-                print(f"Auto-backup created: {filename}")
+    async def get_leaderboard(self, top_n: int = 10, group: str = None) -> List[LeaderboardEntry]:
+        """Get leaderboard data"""
+        try:
+            return await self.leaderboard_service.get_leaderboard(limit=top_n, group=group)
+        except Exception as e:
+            print(f"Error getting leaderboard: {e}")
+            return []
     
-    def get_export_summary(self) -> Dict:
-        """Get summary statistics for export"""
-        total_users = len(self.data["users"])
-        total_attempts = sum(user["attempts"] for user in self.data["users"].values())
-        active_users = len([u for u in self.data["users"].values() if u["attempts"] > 0])
-        
-        avg_score_all = 0
-        if total_attempts > 0:
-            total_score_all = sum(user["total_score"] for user in self.data["users"].values())
-            avg_score_all = round(total_score_all / total_attempts, 2)
-        
-        return {
-            "total_users": total_users,
-            "active_users": active_users,
-            "total_attempts": total_attempts,
-            "avg_score_all_users": avg_score_all,
-            "leaderboard_size": len(self.data["leaderboard"])
-        }
+    async def get_multi_group_leaderboard(self, limit_per_group: int = 20) -> Dict[str, List[LeaderboardEntry]]:
+        """Get leaderboard data organized by groups plus overall"""
+        try:
+            return await self.leaderboard_service.get_multi_group_leaderboard(limit_per_group)
+        except Exception as e:
+            print(f"Error getting multi-group leaderboard: {e}")
+            return {}
+    
+    async def export_user_data(self, ldap_id: str = None) -> Dict[str, Any]:
+        """Export user data (single user or all users)"""
+        try:
+            if ldap_id:
+                # Single user export
+                user_stats = await self.get_user_stats(ldap_id)
+                recent_attempts = await self.progress_service.get_user_recent_attempts(ldap_id, limit=50)
+                badges = []
+                if user_stats:
+                    user = await self.user_service.get_user_by_ldap_id(ldap_id)
+                    if user:
+                        badges = await self.badge_service.get_user_badges(user.id)
+                
+                return {
+                    "user_stats": user_stats,
+                    "recent_attempts": recent_attempts,
+                    "badges": badges,
+                    "export_timestamp": datetime.now(timezone.utc).isoformat()
+                }
+            else:
+                # All users export
+                leaderboard_data = await self.get_leaderboard(limit=1000)
+                return {
+                    "leaderboard": leaderboard_data,
+                    "export_timestamp": datetime.now(timezone.utc).isoformat(),
+                    "total_users": len(leaderboard_data)
+                }
+                
+        except Exception as e:
+            print(f"Error exporting data: {e}")
+            return {}
 
 
 # Main execution functions for integration with Streamlit
@@ -788,3 +691,54 @@ def get_scenario_statistics() -> Dict[str, int]:
     """Get statistics about available scenarios"""
     generator = CopilotScenarioGenerator()
     return generator.get_scenario_stats()
+
+
+# Initialize database services
+async def init_app():
+    """Initialize the application"""
+    await init_database()
+    print("Application initialized with PostgreSQL database")
+
+
+async def cleanup_app():
+    """Cleanup the application"""
+    await close_database()
+    print("Application cleaned up")
+
+
+if __name__ == "__main__":
+    async def test_app():
+        """Test the application"""
+        await init_app()
+        
+        # Test database services
+        try:
+            tracker = UserProgressTrackerDB()
+            
+            # Test user registration
+            print("Testing user registration...")
+            test_user = await tracker.register_user(
+                ldap_id="test001",
+                username="testuser", 
+                password="testpass",
+                email="test@company.com",
+                group="test"
+            )
+            
+            if test_user:
+                print(f"✓ User created: {test_user.username}")
+            
+            # Test authentication
+            print("Testing authentication...")
+            auth_user = await tracker.authenticate_user("test001", "testpass")
+            if auth_user:
+                print(f"✓ User authenticated: {auth_user.username}")
+            
+            print("Application test completed successfully")
+            
+        except Exception as e:
+            print(f"Application test failed: {e}")
+        
+        await cleanup_app()
+    
+    asyncio.run(test_app())
