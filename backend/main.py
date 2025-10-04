@@ -229,14 +229,14 @@ async def evaluate_prompt(
 ):
     """Evaluate user's prompt against a scenario"""
     try:
-        # Import evaluation function from the original app
-        from prompt_training_app import evaluate_user_prompt_async
+        # Create a simple evaluation function using Google AI Studio
+        from .ai_evaluator import evaluate_prompt_simple
         
         user_prompt = evaluation_data["prompt"]
         scenario = evaluation_data["scenario"]
         
         # Evaluate the prompt
-        evaluation_result = await evaluate_user_prompt_async(user_prompt, scenario)
+        evaluation_result = await evaluate_prompt_simple(user_prompt, scenario)
         
         # Record progress
         progress_data = ProgressData(
@@ -281,10 +281,39 @@ async def evaluate_prompt(
 async def get_scenarios(level: str = "beginner"):
     """Get scenarios for practice"""
     try:
-        from prompt_training_app import CopilotScenarioGenerator
-        
-        generator = CopilotScenarioGenerator()
-        scenarios = generator.get_scenarios()
+        # Use built-in scenarios for now
+        scenarios = {
+            "beginner": [
+                {
+                    "id": "b1",
+                    "title": "Email Summarization in Outlook",
+                    "description": "You need to catch up on a long email thread about the Q4 marketing campaign.",
+                    "goal": "Get a concise summary of the key decisions and action items",
+                    "context": "You've been out of office for a week and there's a 15-email thread in your inbox",
+                    "product": "Outlook Copilot"
+                }
+            ],
+            "intermediate": [
+                {
+                    "id": "i1",
+                    "title": "Data Analysis in Excel",
+                    "description": "You have sales data for Q1-Q3 and need to identify trends.",
+                    "goal": "Generate insights about sales performance and create visualizations",
+                    "context": "Dataset includes sales by region, product category, and month",
+                    "product": "Excel Copilot"
+                }
+            ],
+            "advanced": [
+                {
+                    "id": "a1",
+                    "title": "Strategic Analysis",
+                    "description": "Senior leadership wants competitive analysis for strategic planning.",
+                    "goal": "Generate comprehensive competitive intelligence report",
+                    "context": "Need to analyze competitors, market trends, and strategic recommendations",
+                    "product": "Microsoft 365 Copilot (Business Chat)"
+                }
+            ]
+        }
         
         return scenarios.get(level, [])
         
@@ -299,10 +328,10 @@ async def get_scenarios(level: str = "beginner"):
 async def generate_ai_scenario(level_data: Dict[str, str]):
     """Generate AI scenario for practice"""
     try:
-        from prompt_training_app import get_ai_scenario_by_level
+        from .ai_evaluator import generate_ai_scenario_simple
         
         level = level_data["level"]
-        scenario = await get_ai_scenario_by_level(level)
+        scenario = await generate_ai_scenario_simple(level)
         
         return scenario
         
@@ -382,8 +411,12 @@ async def get_admin_stats(current_user: Dict = Depends(get_current_user)):
         # TODO: Implement admin authorization check
         
         # Get basic stats
-        from prompt_training_app import get_scenario_statistics
-        scenario_stats = get_scenario_statistics()
+        scenario_stats = {
+            "beginner_count": 1,
+            "intermediate_count": 1,
+            "advanced_count": 1,
+            "total_scenarios": 3
+        }
         
         # Get user count and other admin data
         # This would require additional queries
