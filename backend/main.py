@@ -1,6 +1,7 @@
 """
 FastAPI Backend for Prompt Engineering Training App
 Recreating the Streamlit app functionality with modern FastAPI backend
+Now with PostgreSQL integration and LDAP ID support
 """
 
 from fastapi import FastAPI, HTTPException, Depends
@@ -32,15 +33,19 @@ from prompt_training_app import (
     get_ai_scenario_by_level,
     get_mixed_scenario_by_level,
     get_scenario_statistics,
-    UserProgressTracker,
     CopilotScenarioGenerator
 )
+
+# Import PostgreSQL components
+from database import create_tables, get_db
+from postgres_tracker import PostgreSQLUserProgressTracker
+from sqlalchemy.orm import Session
 
 # Initialize FastAPI app
 app = FastAPI(
     title="Prompt Engineering Training API",
-    description="Backend API for the Gamified Prompt Engineering Training App",
-    version="1.0.0"
+    description="Backend API for the Gamified Prompt Engineering Training App with PostgreSQL",
+    version="2.0.0"
 )
 
 # Configure CORS
@@ -52,12 +57,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Create database tables on startup
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database tables"""
+    try:
+        create_tables()
+        print("Database tables created successfully")
+    except Exception as e:
+        print(f"Error creating database tables: {e}")
+
 # Global tracker instance
-# Use the main user_progress.json file from the project root
-tracker = UserProgressTracker(storage_file="../user_progress.json")
+tracker = PostgreSQLUserProgressTracker()
 
 # Pydantic models for request/response validation
 class UserRequest(BaseModel):
+    ldap_id: str
     username: str
 
 class EvaluatePromptRequest(BaseModel):
@@ -70,7 +85,7 @@ class ScenarioGenerationRequest(BaseModel):
     ai_probability: Optional[float] = 0.3
 
 class AttemptRecord(BaseModel):
-    username: str
+    ldap_id: str
     scenario_id: str
     user_prompt: str
     evaluation: Dict[str, Any]
@@ -78,22 +93,22 @@ class AttemptRecord(BaseModel):
 # Health check endpoint
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+    return {"status": "healthy", "timestamp": datetime.now().isoformat(), "database": "postgresql"}
 
 # User management endpoints
 @app.post("/api/users")
 async def add_user(request: UserRequest):
-    """Add a new user"""
+    """Add a new user with LDAP ID"""
     try:
-        tracker.add_user(request.username)
-        return {"message": f"User {request.username} added successfully"}
+        tracker.add_user(request.ldap_id, request.username)
+        return {"message": f"User {request.username} with LDAP ID {request.ldap_id} added successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/users/{username}/stats")
-async def get_user_stats(username: str):
-    """Get user statistics"""
-    stats = tracker.get_user_stats(username)
+@app.get("/api/users/{ldap_id}/stats")
+async def get_user_stats(ldap_id: str):
+    """Get user statistics by LDAP ID"""
+    stats = tracker.get_user_stats(ldap_id)
     if stats is None:
         raise HTTPException(status_code=404, detail="User not found")
     return stats
@@ -126,7 +141,8 @@ async def generate_scenario(request: ScenarioGenerationRequest):
         elif request.mode == "ai":
             scenario = await get_ai_scenario_by_level(request.level)
         elif request.mode == "mixed":
-            scenario = await get_mixed_scenario_by_level(request.level, request.ai_probability)
+            ai_prob = request.ai_probability if request.ai_probability is not None else 0.3
+            scenario = await get_mixed_scenario_by_level(request.level, ai_prob)
         else:
             raise HTTPException(status_code=400, detail="Invalid generation mode")
         
@@ -159,7 +175,7 @@ async def record_attempt(request: AttemptRecord):
     """Record a user's attempt"""
     try:
         tracker.record_attempt(
-            request.username,
+            request.ldap_id,
             request.scenario_id,
             request.evaluation["total_score"],
             request.evaluation,
@@ -196,7 +212,7 @@ async def export_to_csv(filename: Optional[str] = None):
 @app.get("/api/progress/raw-data")
 async def get_raw_data():
     """Get raw JSON data for admin purposes"""
-    return tracker.data
+    return tracker.get_raw_data()
 
 if __name__ == "__main__":
     import uvicorn

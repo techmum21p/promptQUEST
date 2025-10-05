@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast'
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
+  const [ldapId, setLdapId] = useState('')
   const { login, isLoading } = useAppStore()
 
   const testConnection = async () => {
@@ -22,17 +23,17 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted with username:', username)
+    console.log('Form submitted with username:', username, 'ldapId:', ldapId)
     
-    if (!username.trim()) {
-      toast.error('Please enter a username')
-      console.log('Username empty, showing error toast')
+    if (!username.trim() || !ldapId.trim()) {
+      toast.error('Please enter both username and LDAP ID')
+      console.log('Missing fields, showing error toast')
       return
     }
 
     try {
       console.log('Attempting login...')
-      await login(username.trim())
+      await login(username.trim(), ldapId.trim())
       console.log('Login successful, showing success toast')
       toast.success(`Welcome to PromptQuest, ${username}!`)
     } catch (error) {
@@ -60,15 +61,30 @@ export default function LoginPage() {
         <div className="bg-white p-8 rounded-xl shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
+              <label htmlFor="ldapId" className="block text-sm font-medium text-gray-700 mb-2">
+                LDAP ID
+              </label>
+              <input
+                type="text"
+                id="ldapId"
+                value={ldapId}
+                onChange={(e) => setLdapId(e.target.value)}
+                placeholder="Your LDAP ID"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors"
+                disabled={isLoading}
+              />
+            </div>
+            
+            <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                Enter your username
+                Username
               </label>
               <input
                 type="text"
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Your username"
+                placeholder="Your display name"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors"
                 disabled={isLoading}
               />
@@ -76,7 +92,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              disabled={isLoading || !username.trim()}
+              disabled={isLoading || !username.trim() || !ldapId.trim()}
               className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-gray-300 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 disabled:cursor-not-allowed"
             >
               {isLoading ? (
