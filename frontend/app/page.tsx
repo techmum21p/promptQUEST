@@ -1,17 +1,45 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useAppStore } from '@/lib/store'
-import LoginPage from '@/components/LoginPage'
-import Layout from '@/components/Layout'
-import Dashboard from '@/components/Dashboard'
-import PracticeMode from '@/components/PracticeMode'
-import Leaderboard from '@/components/Leaderboard'
-import ProgressHistory from '@/components/ProgressHistory'
-import DataExport from '@/components/DataExport'
-import LearningResources from '@/components/LearningResources'
-import AdminPanel from '@/components/AdminPanel'
+import dynamic from 'next/dynamic'
+
+// Dynamically import components to prevent hydration issues
+const LoginPage = dynamic(() => import('@/components/LoginPage'), { ssr: false })
+const Layout = dynamic(() => import('@/components/Layout'), { ssr: false })
+const Dashboard = dynamic(() => import('@/components/Dashboard'), { ssr: false })
+const PracticeMode = dynamic(() => import('@/components/PracticeMode'), { ssr: false })
+const Leaderboard = dynamic(() => import('@/components/Leaderboard'), { ssr: false })
+const ProgressHistory = dynamic(() => import('@/components/ProgressHistory'), { ssr: false })
+const DataExport = dynamic(() => import('@/components/DataExport'), { ssr: false })
+const LearningResources = dynamic(() => import('@/components/LearningResources'), { ssr: false })
+const AdminPanel = dynamic(() => import('@/components/AdminPanel'), { ssr: false })
 
 export default function Home() {
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  // Ensure hydration is complete before rendering
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
+
+  // Show loading state until hydration is complete
+  if (!isHydrated) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-2xl mb-4">🎯</div>
+          <h1 className="text-xl font-semibold text-gray-900 mb-2">PromptQuest</h1>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  return <ClientApp />
+}
+
+function ClientApp() {
   const { currentUser } = useAppStore()
 
   if (!currentUser) {

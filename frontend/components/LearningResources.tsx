@@ -1,6 +1,10 @@
 'use client'
 
+import { useAppStore } from '@/lib/store'
+
 export default function LearningResources() {
+  const { navigateTo } = useAppStore()
+  
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">📚 Learning Resources</h1>
@@ -179,8 +183,8 @@ export default function LearningResources() {
                 <a href="https://adoption.microsoft.com/copilot/" target="_blank" rel="noopener noreferrer" className="block text-blue-600 hover:text-blue-800">
                   → Microsoft 365 Copilot Best Practices
                 </a>
-                <a href="https://www.hbs.net/blog/copilot-prompt-help" target="_blank" rel="noopener noreferrer" className="block text-blue-600 hover:text-blue-800">
-                  → Best Microsoft Copilot Prompts--And How to Write Them
+                <a href="https://www.dataprise.com/resources/blog/microsoft-copilot-prompts/" target="_blank" rel="noopener noreferrer" className="block text-blue-600 hover:text-blue-800">
+                  → Copilot Prompting: Mastering the Art for Optimal Results
                 </a>
               </div>
             </div>
@@ -231,11 +235,12 @@ export default function LearningResources() {
             </div>
             
             <div className="text-center">
-              <a href="/practice">
-                <button className="btn-primary">
-                  🎯 Try AI Generation Now!
-                </button>
-              </a>
+              <button 
+                onClick={() => navigateTo('practice')}
+                className="btn-primary"
+              >
+                🎯 Try AI Generation Now!
+              </button>
               <p className="text-sm text-gray-600 mt-2">
                 👆 Go to <strong>Practice Mode</strong> and select <strong>🤖 AI-Generated Scenarios</strong> to experience this feature!
               </p>

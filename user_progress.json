@@ -503,8 +503,8 @@
       ]
     },
     "coy": {
-      "total_score": 86,
-      "attempts": 1,
+      "total_score": 176,
+      "attempts": 2,
       "skill_level": "beginner",
       "badges": [],
       "history": [
@@ -531,14 +531,53 @@
             ]
           },
           "user_prompt": "Apply consistent professional formatting to this report: use Arial 11pt for body text, Arial 14pt bold for headings, 1.15 line spacing, and ensure uniform margins"
+        },
+        {
+          "timestamp": "2025-10-05T10:48:43.582547",
+          "scenario_id": "b1",
+          "score": 90,
+          "evaluation": {
+            "clarity_score": 23,
+            "specificity_score": 20,
+            "structure_score": 22,
+            "task_alignment_score": 25,
+            "total_score": 90,
+            "feedback": "This is a very strong and effective prompt. It clearly articulates the user's need for key decisions and action items, specifies the relevant email thread, and crucially includes the time constraint (\"from the past week\") which directly addresses the scenario of being out of office. The prompt is concise, unambiguous, and perfectly aligned with the goal of quickly catching up on important information.",
+            "strengths": [
+              "Explicitly requests \"key decisions and action items.\"",
+              "Clearly identifies the subject matter (\"Q4 marketing campaign email thread\").",
+              "Includes a precise time frame (\"from the past week\") which is highly relevant to the user's context of being out of office.",
+              "Highly aligned with the user's goal of quickly catching up.",
+              "Concise and easy to understand."
+            ],
+            "improvements": [
+              "For potentially even better structured output, the user could optionally specify a preferred format (e.g., \"Summarize as bullet points,\" or \"List action items with responsible parties\").",
+              "While implied, adding a brief statement about the *purpose* (e.g., \"so I can quickly get up to speed\") could sometimes reinforce the summarization goal, though it's not strictly necessary here."
+            ]
+          },
+          "user_prompt": "Summarize the key decisions and action items from the Q4 marketing campaign email thread from the past week"
         }
       ]
+    },
+    "testuser": {
+      "total_score": 0,
+      "attempts": 0,
+      "skill_level": "beginner",
+      "badges": [],
+      "history": []
     }
   },
   "leaderboard": [
     {
       "username": "andy",
       "avg_score": 91.0,
+      "total_attempts": 2,
+      "skill_level": "beginner",
+      "badges": 0
+    },
+    {
+      "username": "coy",
+      "avg_score": 88.0,
       "total_attempts": 2,
       "skill_level": "beginner",
       "badges": 0
@@ -556,13 +595,6 @@
       "total_attempts": 12,
       "skill_level": "advanced",
       "badges": 2
-    },
-    {
-      "username": "coy",
-      "avg_score": 86.0,
-      "total_attempts": 1,
-      "skill_level": "beginner",
-      "badges": 0
     },
     {
       "username": "loui",

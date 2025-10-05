@@ -316,29 +316,32 @@ export default function PracticeMode() {
             <h3 className="text-xl font-semibold text-gray-900">💬 Detailed Feedback</h3>
             <p className="text-gray-700">{evaluationResults.feedback}</p>
             
-            {/* Strengths */}
-            {evaluationResults.strengths.length > 0 && (
-              <div>
-                <h4 className="font-medium text-gray-900 mb-2">✅ Strengths</h4>
-                <ul className="space-y-1">
-                  {evaluationResults.strengths.map((strength: string, index: number) => (
-                    <li key={index} className="text-green-700">✓ {strength}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            
-            {/* Improvements */}
-            {evaluationResults.improvements.length > 0 && (
-              <div>
-                <h4 className="font-medium text-gray-900 mb-2">🔧 Areas for Improvement</h4>
-                <ul className="space-y-1">
-                  {evaluationResults.improvements.map((improvement: string, index: number) => (
-                    <li key={index} className="text-yellow-700">→ {improvement}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {/* Strengths and Improvements Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Strengths */}
+              {evaluationResults.strengths.length > 0 && (
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">✅ Strengths</h4>
+                  <ul className="space-y-1">
+                    {evaluationResults.strengths.map((strength: string, index: number) => (
+                      <li key={index} className="text-green-700">✔️ {strength}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {/* Improvements */}
+              {evaluationResults.improvements.length > 0 && (
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">🔧 Areas for Improvement</h4>
+                  <ul className="space-y-1">
+                    {evaluationResults.improvements.map((improvement: string, index: number) => (
+                      <li key={index} className="text-yellow-700">🟤 {improvement}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Action Buttons */}

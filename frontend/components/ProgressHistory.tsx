@@ -119,14 +119,14 @@ export default function ProgressHistory() {
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         {/* Strengths */}
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-2">
+                          <h4 className="font-bold text-gray-900 mb-2">
                             ✅ Strengths:
                           </h4>
                           {evaluation.strengths?.length > 0 ? (
                             <ul className="space-y-1">
                               {evaluation.strengths.map((strength: string, idx: number) => (
                                 <li key={idx} className="text-sm text-green-700">
-                                  ✓ {strength}
+                                  ✔️ {strength}
                                 </li>
                               ))}
                             </ul>
@@ -137,14 +137,14 @@ export default function ProgressHistory() {
                         
                         {/* Areas for Improvement */}
                         <div>
-                          <h4 className="font-medium text-green-900 mb-2">
+                          <h4 className="font-bold text-gray-900 mb-2">
                             🔧 Areas for Improvement:
                           </h4>
                           {evaluation.improvements?.length > 0 ? (
                             <ul className="space-y-1">
                               {evaluation.improvements.map((improvement: string, idx: number) => (
                                 <li key={idx} className="text-sm text-yellow-700">
-                                  → {improvement}
+                                  🟤 {improvement}
                                 </li>
                               ))}
                             </ul>

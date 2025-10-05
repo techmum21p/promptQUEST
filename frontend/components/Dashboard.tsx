@@ -4,7 +4,7 @@ import { useAppStore } from '@/lib/store'
 import { useEffect } from 'react'
 
 export default function Dashboard() {
-  const { userStats, fetchUserStats } = useAppStore()
+  const { userStats, fetchUserStats, navigateTo } = useAppStore()
 
   useEffect(() => {
     fetchUserStats()
@@ -145,12 +145,12 @@ export default function Dashboard() {
 
       {/* Call to Action */}
       <div className="mt-8 text-center">
-        <a
-          href="/practice"
+        <button
+          onClick={() => navigateTo('practice')}
           className="inline-flex items-center px-6 py-3 btn-primary text-lg"
         >
           🚀 Start Practicing Now
-        </a>
+        </button>
       </div>
     </div>
   )
